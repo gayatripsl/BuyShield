@@ -1,7 +1,21 @@
 from flask import Flask, render_template_string, request
+import pickle
+import os
+import pandas as pd
 
 app = Flask(__name__)
 
+# ─── Load ML Model ───
+model = None
+model_path = os.path.join(os.path.dirname(__file__), 'buyshield_model.pkl')
+try:
+    with open(model_path, 'rb') as f:
+        model = pickle.load(f)
+    print("✅ ML model loaded!")
+except Exception as e:
+    print(f"⚠️ Model not found, using rule-based scoring: {e}")
+
+# ─── Translations ───
 TRANSLATIONS = {
     'en': {
         'title': 'BuyShield — Fake Seller Detector',
@@ -212,24 +226,47 @@ TRANSLATIONS = {
     }
 }
 
+# ─── Scoring Engine ───
 def calculate_risk_score(answers):
-    score = 0
     flag_indices = []
     checks = [
-        ('refused_video_call', 25),
-        ('payment_before_product', 20),
-        ('refused_date_photo', 15),
-        ('urgency_tactics', 15),
-        ('page_very_new', 10),
-        ('unrealistic_price', 10),
-        ('blocked_after_payment', 20),
-        ('extra_charges_after_payment', 25),
+        'refused_video_call',
+        'payment_before_product',
+        'refused_date_photo',
+        'urgency_tactics',
+        'page_very_new',
+        'unrealistic_price',
+        'blocked_after_payment',
+        'extra_charges_after_payment',
     ]
-    for i, (key, points) in enumerate(checks):
+    for i, key in enumerate(checks):
         if answers.get(key):
-            score += points
             flag_indices.append(i)
+
+    # Use ML model if available
+    if model is not None:
+        try:
+            input_data = pd.DataFrame([{
+                'refused_video_call': int(answers.get('refused_video_call', False)),
+                'payment_before_product': int(answers.get('payment_before_product', False)),
+                'refused_date_photo': int(answers.get('refused_date_photo', False)),
+                'urgency_tactics': int(answers.get('urgency_tactics', False)),
+                'page_very_new': int(answers.get('page_very_new', False)),
+                'unrealistic_price': int(answers.get('unrealistic_price', False)),
+                'blocked_after_payment': int(answers.get('blocked_after_payment', False)),
+                'extra_charges_after_payment': int(answers.get('extra_charges_after_payment', False)),
+            }])
+            prob = model.predict_proba(input_data)[0][1]
+            score = int(prob * 100)
+            return score, flag_indices
+        except Exception as e:
+            print(f"Model prediction error: {e}")
+
+    # Fallback to rule-based scoring
+    points = [25, 20, 15, 15, 10, 10, 20, 25]
+    score = sum(points[i] for i in flag_indices)
     return min(score, 100), flag_indices
+
 
 def get_verdict_key(score):
     if score >= 70:
@@ -238,6 +275,7 @@ def get_verdict_key(score):
         return 'caution', 'caution_sub', 'orange'
     else:
         return 'low_risk', 'low_risk_sub', 'green'
+
 
 def get_guidance(score, answers, lang):
     t = TRANSLATIONS[lang]
@@ -250,6 +288,7 @@ def get_guidance(score, answers, lang):
         return t['guidance_medium']
     else:
         return t['guidance_low']
+
 
 HTML = """
 <!DOCTYPE html>
@@ -272,7 +311,6 @@ HTML = """
             --green: #00d4a0;
             --orange: #ffa500;
             --red: #ff4444;
-            --shield: #4a90e2;
         }
         :root[data-theme="light"] {
             --bg: #f0f2f8;
@@ -287,24 +325,17 @@ HTML = """
             --green: #00a87a;
             --orange: #e08800;
             --red: #cc2222;
-            --shield: #2266cc;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; transition: background 0.3s, color 0.3s; }
         body { font-family: 'Segoe UI', Arial, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
 
-        /* ── HEADER ── */
         .header {
             background: var(--surface);
             border-bottom: 1px solid var(--border);
-            padding: 0 24px;
-            height: 64px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            position: sticky;
-            top: 0;
-            z-index: 100;
+            padding: 0 24px; height: 64px;
+            display: flex; align-items: center; justify-content: space-between;
+            position: sticky; top: 0; z-index: 100;
             box-shadow: 0 2px 20px rgba(0,0,0,0.1);
         }
         .logo { display: flex; align-items: center; gap: 10px; }
@@ -319,8 +350,6 @@ HTML = """
         .logo-text span { color: var(--accent); }
 
         .header-right { display: flex; align-items: center; gap: 12px; }
-
-        /* Language buttons */
         .lang-group { display: flex; gap: 4px; background: var(--surface2); padding: 4px; border-radius: 8px; }
         .lang-btn {
             padding: 5px 12px; border-radius: 6px; font-size: 12px; font-weight: 600;
@@ -329,7 +358,6 @@ HTML = """
         .lang-btn.active { background: var(--accent); color: white; }
         .lang-btn:hover:not(.active) { background: var(--border); color: var(--text); }
 
-        /* Theme toggle */
         .theme-toggle {
             width: 40px; height: 40px; border-radius: 10px;
             background: var(--surface2); border: 1px solid var(--border);
@@ -338,12 +366,10 @@ HTML = """
         }
         .theme-toggle:hover { background: var(--border); }
 
-        /* ── HERO ── */
         .hero {
             background: linear-gradient(135deg, var(--surface) 0%, var(--surface2) 100%);
             border-bottom: 1px solid var(--border);
-            padding: 48px 24px;
-            text-align: center;
+            padding: 48px 24px; text-align: center;
         }
         .hero-badge {
             display: inline-flex; align-items: center; gap: 6px;
@@ -354,21 +380,15 @@ HTML = """
         .hero h1 { font-size: 36px; font-weight: 900; margin-bottom: 12px; line-height: 1.2; }
         .hero h1 span { color: var(--accent); }
         .hero p { color: var(--text2); font-size: 16px; max-width: 500px; margin: 0 auto 28px; }
-
         .hero-stats { display: flex; justify-content: center; gap: 32px; flex-wrap: wrap; }
         .stat { display: flex; align-items: center; gap: 8px; color: var(--text2); font-size: 13px; }
         .stat-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--green); }
 
-        /* ── MAIN CONTAINER ── */
         .container { max-width: 680px; margin: 0 auto; padding: 32px 20px; }
 
-        /* ── QUESTION CARD ── */
         .form-card {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            padding: 28px;
-            margin-bottom: 20px;
+            background: var(--surface); border: 1px solid var(--border);
+            border-radius: 20px; padding: 28px; margin-bottom: 20px;
             box-shadow: 0 4px 24px rgba(0,0,0,0.06);
         }
         .form-card h2 {
@@ -380,18 +400,12 @@ HTML = """
         .form-card h2::before { content: '📋'; }
 
         .question {
-            padding: 16px;
-            background: var(--surface2);
-            border-radius: 12px;
-            margin-bottom: 12px;
-            border: 1px solid var(--border);
-            transition: border-color 0.2s;
+            padding: 16px; background: var(--surface2);
+            border-radius: 12px; margin-bottom: 12px;
+            border: 1px solid var(--border); transition: border-color 0.2s;
         }
         .question:hover { border-color: var(--accent); }
-        .question-num {
-            font-size: 10px; font-weight: 700; color: var(--accent);
-            text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px;
-        }
+        .question-num { font-size: 10px; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
         .question p { font-size: 14px; color: var(--text); line-height: 1.5; margin-bottom: 14px; font-weight: 500; }
 
         .radio-group { display: flex; gap: 10px; }
@@ -406,11 +420,9 @@ HTML = """
         .radio-option:hover { border-color: var(--accent); color: var(--accent); }
         .radio-option.yes-opt:hover { background: rgba(233,69,96,0.08); }
         .radio-option.no-opt:hover { background: rgba(0,212,160,0.08); border-color: var(--green); color: var(--green); }
-        .radio-option input:checked + .radio-label { font-weight: 700; }
         .radio-option:has(input:checked).yes-opt { border-color: var(--accent); background: rgba(233,69,96,0.12); color: var(--accent); }
         .radio-option:has(input:checked).no-opt { border-color: var(--green); background: rgba(0,212,160,0.12); color: var(--green); }
 
-        /* ── SUBMIT BUTTON ── */
         .submit-btn {
             width: 100%; padding: 16px;
             background: linear-gradient(135deg, var(--accent), var(--accent2));
@@ -420,13 +432,10 @@ HTML = """
             transition: transform 0.2s, box-shadow 0.2s;
         }
         .submit-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 28px rgba(233,69,96,0.45); }
-        .submit-btn:active { transform: translateY(0); }
 
-        /* ── RESULT ── */
         .result-hero {
-            border-radius: 20px; padding: 32px;
-            text-align: center; margin-bottom: 20px;
-            border: 1px solid var(--border);
+            border-radius: 20px; padding: 32px; text-align: center;
+            margin-bottom: 20px; border: 1px solid var(--border);
         }
         .result-red { background: linear-gradient(135deg, rgba(255,68,68,0.08), rgba(255,68,68,0.03)); border-color: rgba(255,68,68,0.3); }
         .result-orange { background: linear-gradient(135deg, rgba(255,165,0,0.08), rgba(255,165,0,0.03)); border-color: rgba(255,165,0,0.3); }
@@ -435,9 +444,7 @@ HTML = """
         .score-ring {
             width: 140px; height: 140px; border-radius: 50%;
             display: flex; flex-direction: column; align-items: center; justify-content: center;
-            margin: 0 auto 20px;
-            border: 6px solid var(--border);
-            position: relative;
+            margin: 0 auto 20px; border: 6px solid var(--border); position: relative;
         }
         .score-ring.red { border-color: var(--red); box-shadow: 0 0 30px rgba(255,68,68,0.25); }
         .score-ring.orange { border-color: var(--orange); box-shadow: 0 0 30px rgba(255,165,0,0.25); }
@@ -459,34 +466,23 @@ HTML = """
         .verdict-badge.green { background: rgba(0,212,160,0.15); color: var(--green); }
         .verdict-sub { color: var(--text2); font-size: 14px; }
 
-        /* ── FLAGS + GUIDANCE ── */
         .section-card {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 16px; padding: 22px;
-            margin-bottom: 16px;
+            background: var(--surface); border: 1px solid var(--border);
+            border-radius: 16px; padding: 22px; margin-bottom: 16px;
         }
-        .section-title {
-            font-size: 14px; font-weight: 700; color: var(--text);
-            margin-bottom: 14px; display: flex; align-items: center; gap: 8px;
-        }
+        .section-title { font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
         .flag-item {
             padding: 12px 14px; margin-bottom: 8px;
-            background: rgba(255,68,68,0.06);
-            border-left: 3px solid var(--red);
-            border-radius: 0 8px 8px 0;
-            font-size: 13px; color: var(--text2); line-height: 1.5;
+            background: rgba(255,68,68,0.06); border-left: 3px solid var(--red);
+            border-radius: 0 8px 8px 0; font-size: 13px; color: var(--text2); line-height: 1.5;
         }
         .guidance-item {
-            padding: 12px 14px; margin-bottom: 8px;
-            background: var(--surface2);
-            border-radius: 8px;
-            font-size: 13px; color: var(--text2); line-height: 1.5;
+            padding: 12px 14px; margin-bottom: 8px; background: var(--surface2);
+            border-radius: 8px; font-size: 13px; color: var(--text2); line-height: 1.5;
             display: flex; align-items: flex-start; gap: 8px;
         }
         .guidance-item::before { content: "✅"; flex-shrink: 0; }
 
-        /* ── BUTTONS ── */
         .btn-report {
             display: block; text-align: center; padding: 14px;
             background: linear-gradient(135deg, var(--accent), var(--accent2));
@@ -498,32 +494,24 @@ HTML = """
             display: block; text-align: center; padding: 14px;
             background: var(--surface); color: var(--accent);
             border-radius: 12px; text-decoration: none;
-            font-weight: 700; font-size: 15px;
-            border: 2px solid var(--accent);
+            font-weight: 700; font-size: 15px; border: 2px solid var(--accent);
         }
 
-        /* ── DISCLAIMER ── */
-        .disclaimer {
-            text-align: center; padding: 16px;
-            color: var(--text3); font-size: 11px; line-height: 1.6;
-            border-top: 1px solid var(--border); margin-top: 20px;
+        .ai-badge {
+            display: inline-flex; align-items: center; gap: 6px;
+            background: rgba(74,144,226,0.1); border: 1px solid rgba(74,144,226,0.3);
+            color: #4a90e2; padding: 4px 10px; border-radius: 12px;
+            font-size: 11px; font-weight: 600; margin-left: 8px;
         }
 
-        /* ── FOOTER ── */
-        .footer {
-            text-align: center; padding: 24px;
-            border-top: 1px solid var(--border);
-            color: var(--text3); font-size: 12px;
-            background: var(--surface);
-        }
+        .disclaimer { text-align: center; padding: 16px; color: var(--text3); font-size: 11px; line-height: 1.6; border-top: 1px solid var(--border); margin-top: 20px; }
+        .footer { text-align: center; padding: 24px; border-top: 1px solid var(--border); color: var(--text3); font-size: 12px; background: var(--surface); }
         .footer strong { color: var(--accent); }
 
-        /* ── MOBILE ── */
         @media (max-width: 480px) {
             .hero h1 { font-size: 26px; }
             .hero-stats { gap: 16px; }
             .lang-group { display: none; }
-            .header { padding: 0 16px; }
             .container { padding: 20px 14px; }
             .score-ring { width: 120px; height: 120px; }
             .score-num { font-size: 40px; }
@@ -532,7 +520,6 @@ HTML = """
 </head>
 <body>
 
-<!-- HEADER -->
 <header class="header">
     <div class="logo">
         <div class="logo-icon">🛡️</div>
@@ -540,15 +527,14 @@ HTML = """
     </div>
     <div class="header-right">
         <div class="lang-group">
-            <a href="/?lang=en{% if result %}&result=1{% endif %}" class="lang-btn {% if lang == 'en' %}active{% endif %}">EN</a>
-            <a href="/?lang=te{% if result %}&result=1{% endif %}" class="lang-btn {% if lang == 'te' %}active{% endif %}">తెలుగు</a>
-            <a href="/?lang=hi{% if result %}&result=1{% endif %}" class="lang-btn {% if lang == 'hi' %}active{% endif %}">हिंदी</a>
+            <a href="/?lang=en" class="lang-btn {% if lang == 'en' %}active{% endif %}">EN</a>
+            <a href="/?lang=te" class="lang-btn {% if lang == 'te' %}active{% endif %}">తెలుగు</a>
+            <a href="/?lang=hi" class="lang-btn {% if lang == 'hi' %}active{% endif %}">हिंदी</a>
         </div>
-        <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn">🌙</button>
+        <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn">☀️</button>
     </div>
 </header>
 
-<!-- HERO -->
 <div class="hero">
     <div class="hero-badge">🛡️ Made for India</div>
     <h1>{{ t.header }} — <span>{{ t.tagline }}</span></h1>
@@ -564,15 +550,13 @@ HTML = """
 
 {% if not result %}
 
-<!-- INTRO -->
 <div class="form-card" style="margin-bottom:20px; padding: 20px;">
     <p style="color: var(--text2); font-size: 14px; line-height: 1.7;">{{ t.intro }}</p>
 </div>
 
-<!-- FORM -->
 <form method="POST" action="/check?lang={{ lang }}">
 <div class="form-card">
-    <h2>{{ t.form_title }}</h2>
+    <h2>{{ t.form_title }} <span class="ai-badge">🤖 AI Powered</span></h2>
 
     {% for i in range(8) %}
     <div class="question">
@@ -597,7 +581,6 @@ HTML = """
 
 {% else %}
 
-<!-- RESULT HERO -->
 <div class="result-hero result-{{ color }}">
     <div class="score-ring {{ color }}">
         <div class="score-num {{ color }}">{{ score }}</div>
@@ -608,9 +591,11 @@ HTML = """
         {{ verdict }}
     </div>
     <div class="verdict-sub">{{ verdict_sub }}</div>
+    <div style="margin-top:12px;">
+        <span class="ai-badge">🤖 Powered by Random Forest ML Model</span>
+    </div>
 </div>
 
-<!-- FLAGS -->
 {% if flags %}
 <div class="section-card">
     <div class="section-title">⚠️ {{ t.red_flags }} ({{ flags|length }})</div>
@@ -624,7 +609,6 @@ HTML = """
 </div>
 {% endif %}
 
-<!-- GUIDANCE -->
 <div class="section-card">
     <div class="section-title">💡 {{ t.what_to_do }}</div>
     {% for g in guidance %}
@@ -632,7 +616,6 @@ HTML = """
     {% endfor %}
 </div>
 
-<!-- BUTTONS -->
 {% if score >= 70 %}
 <a href="https://cybercrime.gov.in" target="_blank" class="btn-report">{{ t.report }}</a>
 {% endif %}
@@ -640,19 +623,16 @@ HTML = """
 
 {% endif %}
 
-<!-- DISCLAIMER -->
 <div class="disclaimer">{{ t.disclaimer }}</div>
 
 </div>
 
-<!-- FOOTER -->
 <footer class="footer">
     <strong>BuyShield</strong> — {{ t.footer_tagline }}<br>
     {{ t.footer_note }}
 </footer>
 
 <script>
-    // Theme toggle
     function toggleTheme() {
         const html = document.documentElement;
         const btn = document.getElementById('themeBtn');
@@ -667,19 +647,9 @@ HTML = """
         }
     }
 
-    // Load saved theme
     const savedTheme = localStorage.getItem('theme') || 'dark';
     document.documentElement.setAttribute('data-theme', savedTheme);
     document.getElementById('themeBtn').textContent = savedTheme === 'dark' ? '☀️' : '🌙';
-
-    // Highlight selected radio options
-    document.querySelectorAll('.radio-option input').forEach(input => {
-        input.addEventListener('change', function() {
-            const group = this.closest('.radio-group');
-            group.querySelectorAll('.radio-option').forEach(opt => opt.classList.remove('selected'));
-            this.closest('.radio-option').classList.add('selected');
-        });
-    });
 </script>
 
 </body>
