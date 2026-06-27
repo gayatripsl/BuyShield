@@ -550,7 +550,7 @@ HTML = """
 
 <!-- HERO -->
 <div class="hero">
-    <div class="hero-badge">🇮🇳 Made for India</div>
+    <div class="hero-badge">🛡️ Made for India</div>
     <h1>{{ t.header }} — <span>{{ t.tagline }}</span></h1>
     <p>{{ t.subtitle }}</p>
     <div class="hero-stats">
