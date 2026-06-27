@@ -2,45 +2,53 @@ from flask import Flask, render_template_string, request
 
 app = Flask(__name__)
 
-# ─── Translations ───
 TRANSLATIONS = {
     'en': {
         'title': 'BuyShield — Fake Seller Detector',
-        'header': '🛡️ BuyShield',
-        'subtitle': 'AI-Powered Fake Instagram Seller Detector — Check Before You Pay',
-        'intro': 'Before paying any Instagram seller, answer these 8 simple questions. BuyShield will analyse the seller behaviour and give you a risk score in seconds. Free. No registration needed.',
-        'form_title': 'Answer about the seller',
+        'header': 'BuyShield',
+        'tagline': 'Check Before You Pay',
+        'subtitle': 'AI-Powered Protection Against Fake Instagram Sellers',
+        'intro': 'Before paying any Instagram seller, answer these 8 simple questions. BuyShield analyses seller behaviour and gives you a risk score in seconds.',
+        'free': '100% Free',
+        'no_reg': 'No Registration',
+        'instant': 'Instant Result',
+        'form_title': 'Answer About The Seller',
         'submit': '🛡️ Check Now',
         'check_again': '🔄 Check Another Seller',
         'report': '🚨 Report This Scam at cybercrime.gov.in',
         'red_flags': 'Red Flags Detected',
-        'no_flags': '✅ No major red flags detected',
+        'no_flags': 'No major red flags detected',
         'what_to_do': 'What You Should Do',
-        'footer': 'BuyShield — Protecting innocent Indian buyers 🛡️\nWhen in doubt — don\'t pay. Stay safe.',
+        'footer_tagline': 'Protecting innocent Indian buyers',
+        'footer_note': 'When in doubt — don\'t pay. Stay safe.',
+        'disclaimer': 'BuyShield provides risk assessment based on user-reported behaviour patterns. This is not a definitive accusation. Always use your own judgement.',
         'questions': [
             'Did the seller REFUSE a video call showing the product?',
-            'Did they demand FULL PAYMENT before showing you the actual product?',
-            'Did they REFUSE to photograph the product with today\'s date written on paper?',
+            'Did they demand FULL PAYMENT before showing the actual product?',
+            'Did they REFUSE to photograph the product with today\'s date on paper?',
             'Did they use urgency like "today only offer" or "last piece left"?',
             'Is their Instagram page LESS THAN 1 MONTH old?',
-            'Are their prices UNREALISTICALLY CHEAP compared to market rate?',
-            'Did they BLOCK YOU or go silent immediately after payment?',
-            'After payment, did they ask for EXTRA MONEY like shipping fee or customs charge?',
+            'Are their prices UNREALISTICALLY CHEAP compared to market?',
+            'Did they BLOCK YOU or go silent after payment?',
+            'After payment, did they ask for EXTRA MONEY like shipping fee?',
         ],
         'yes': 'Yes',
         'no': 'No',
-        'high_risk': 'HIGH RISK — Do NOT pay this seller',
-        'caution': 'CAUTION — Multiple red flags. Verify before paying.',
-        'low_risk': 'LOWER RISK — Fewer red flags. Still verify carefully.',
+        'high_risk': 'HIGH RISK',
+        'high_risk_sub': 'Do NOT pay this seller',
+        'caution': 'CAUTION',
+        'caution_sub': 'Verify before paying',
+        'low_risk': 'LOWER RISK',
+        'low_risk_sub': 'Still verify carefully',
         'flags': [
             'Seller refused video call — genuine sellers always agree to show product live',
-            'Demanded payment WITHOUT showing product first — this is the primary scam mechanism',
-            'Refused to photograph product with today\'s date — suggests product does not exist',
-            'Used urgency tactics like today only or last piece — designed to stop you from thinking',
-            'Instagram page is less than 1 month old — scammers need to act fast and disappear',
-            'Prices are unrealistically low — scammers use low prices as bait',
-            'Seller blocked or went silent after payment — confirmed scam behaviour',
-            'Seller asked for extra charges AFTER payment — this is Advance Fee Fraud. Stop paying immediately.',
+            'Demanded payment WITHOUT showing product first — primary scam mechanism',
+            'Refused date paper photo — suggests product does not exist',
+            'Used urgency tactics — designed to stop you from thinking carefully',
+            'Page less than 1 month old — scammers need to act fast and disappear',
+            'Prices unrealistically low — scammers use low prices as bait',
+            'Blocked after payment — confirmed scam behaviour',
+            'Asked for extra charges after payment — this is Advance Fee Fraud',
         ],
         'guidance_high': [
             'Do NOT send any more money',
@@ -66,131 +74,147 @@ TRANSLATIONS = {
     },
     'te': {
         'title': 'BuyShield — నకిలీ విక్రేత గుర్తింపు',
-        'header': '🛡️ BuyShield',
-        'subtitle': 'AI ఆధారిత నకిలీ Instagram విక్రేత గుర్తింపు — చెల్లించే ముందు తనిఖీ చేయండి',
-        'intro': 'ఏదైనా Instagram విక్రేతకు చెల్లించే ముందు ఈ 8 సాధారణ ప్రశ్నలకు సమాధానం ఇవ్వండి. BuyShield విక్రేత ప్రవర్తనను విశ్లేషించి మీకు రిస్క్ స్కోర్ ఇస్తుంది. ఉచితం. రిజిస్ట్రేషన్ అవసరం లేదు.',
+        'header': 'BuyShield',
+        'tagline': 'చెల్లించే ముందు తనిఖీ చేయండి',
+        'subtitle': 'నకిలీ Instagram విక్రేతలకు వ్యతిరేకంగా AI రక్షణ',
+        'intro': 'ఏదైనా Instagram విక్రేతకు చెల్లించే ముందు ఈ 8 సాధారణ ప్రశ్నలకు సమాధానం ఇవ్వండి.',
+        'free': '100% ఉచితం',
+        'no_reg': 'రిజిస్ట్రేషన్ లేదు',
+        'instant': 'తక్షణ ఫలితం',
         'form_title': 'విక్రేత గురించి సమాధానం ఇవ్వండి',
         'submit': '🛡️ ఇప్పుడు తనిఖీ చేయండి',
         'check_again': '🔄 మరొక విక్రేతను తనిఖీ చేయండి',
-        'report': '🚨 cybercrime.gov.in లో ఈ మోసాన్ని రిపోర్ట్ చేయండి',
+        'report': '🚨 cybercrime.gov.in లో రిపోర్ట్ చేయండి',
         'red_flags': 'గుర్తించిన హెచ్చరికలు',
-        'no_flags': '✅ పెద్ద హెచ్చరికలు ఏమీ గుర్తించబడలేదు',
+        'no_flags': 'పెద్ద హెచ్చరికలు ఏమీ లేవు',
         'what_to_do': 'మీరు ఏమి చేయాలి',
-        'footer': 'BuyShield — అమాయక భారతీయ కొనుగోలుదారులను రక్షిస్తోంది 🛡️\nసందేహం ఉంటే — చెల్లించకండి. సురక్షితంగా ఉండండి.',
+        'footer_tagline': 'అమాయక భారతీయ కొనుగోలుదారులను రక్షిస్తోంది',
+        'footer_note': 'సందేహం ఉంటే — చెల్లించకండి.',
+        'disclaimer': 'BuyShield వినియోగదారు నివేదించిన సంకేతాల ఆధారంగా రిస్క్ అంచనా అందిస్తుంది. ఇది నిర్ధారిత అభియోగం కాదు.',
         'questions': [
-            'విక్రేత ఉత్పత్తిని చూపించే వీడియో కాల్‌ను తిరస్కరించారా?',
-            'ఉత్పత్తిని చూపించే ముందే పూర్తి చెల్లింపు డిమాండ్ చేశారా?',
-            'నేటి తేదీ కాగితంతో ఉత్పత్తి ఫోటో తీయడానికి తిరస్కరించారా?',
-            '"ఈరోజు మాత్రమే ఆఫర్" లేదా "చివరి వస్తువు" వంటి అత్యవసరత చూపించారా?',
+            'విక్రేత వీడియో కాల్‌ను తిరస్కరించారా?',
+            'ఉత్పత్తి చూపించే ముందే పూర్తి చెల్లింపు డిమాండ్ చేశారా?',
+            'నేటి తేదీ కాగితంతో ఫోటో తీయడానికి నిరాకరించారా?',
+            '"ఈరోజు మాత్రమే" వంటి అత్యవసరత చూపించారా?',
             'వారి Instagram పేజీ 1 నెల కంటే తక్కువ పాతదా?',
-            'వారి ధరలు మార్కెట్ రేటుతో పోలిస్తే అసాధారణంగా తక్కువగా ఉన్నాయా?',
-            'చెల్లింపు తర్వాత వారు మిమ్మల్ని బ్లాక్ చేశారా లేదా మౌనంగా ఉన్నారా?',
-            'చెల్లింపు తర్వాత షిప్పింగ్ ఫీజు లేదా కస్టమ్స్ చార్జ్ వంటి అదనపు డబ్బు అడిగారా?',
+            'ధరలు అసాధారణంగా తక్కువగా ఉన్నాయా?',
+            'చెల్లింపు తర్వాత బ్లాక్ చేశారా?',
+            'చెల్లింపు తర్వాత అదనపు డబ్బు అడిగారా?',
         ],
         'yes': 'అవును',
         'no': 'కాదు',
-        'high_risk': 'అధిక ప్రమాదం — ఈ విక్రేతకు చెల్లించకండి',
-        'caution': 'జాగ్రత్త — అనేక హెచ్చరికలు. చెల్లించే ముందు ధృవీకరించండి.',
-        'low_risk': 'తక్కువ ప్రమాదం — తక్కువ హెచ్చరికలు. అయినా జాగ్రత్తగా ధృవీకరించండి.',
+        'high_risk': 'అధిక ప్రమాదం',
+        'high_risk_sub': 'చెల్లించకండి',
+        'caution': 'జాగ్రత్త',
+        'caution_sub': 'చెల్లించే ముందు ధృవీకరించండి',
+        'low_risk': 'తక్కువ ప్రమాదం',
+        'low_risk_sub': 'అయినా జాగ్రత్తగా ధృవీకరించండి',
         'flags': [
-            'విక్రేత వీడియో కాల్ తిరస్కరించారు — నిజమైన విక్రేతలు ఎప్పుడూ ఉత్పత్తి చూపించడానికి అంగీకరిస్తారు',
-            'ఉత్పత్తి చూపించే ముందే చెల్లింపు డిమాండ్ చేశారు — ఇది ప్రధాన మోసం పద్ధతి',
-            'నేటి తేదీతో ఉత్పత్తి ఫోటో తీయడానికి నిరాకరించారు — ఉత్పత్తి అస్తిత్వంలో లేదని సూచిస్తుంది',
-            'అత్యవసరత వ్యూహాలు ఉపయోగించారు — మీరు జాగ్రత్తగా ఆలోచించకుండా చేయడానికి',
-            'Instagram పేజీ 1 నెల కంటే తక్కువ పాతది — మోసగాళ్ళు వేగంగా వెళ్ళిపోవాలి',
-            'ధరలు అసాధారణంగా తక్కువగా ఉన్నాయి — మోసగాళ్ళు ఆకర్షణకు తక్కువ ధరలు వాడతారు',
-            'చెల్లింపు తర్వాత విక్రేత బ్లాక్ చేశారు — నిర్ధారిత మోసం ప్రవర్తన',
-            'చెల్లింపు తర్వాత అదనపు చార్జీలు అడిగారు — ఇది అడ్వాన్స్ ఫీ మోసం. వెంటనే చెల్లించడం ఆపండి.',
+            'వీడియో కాల్ తిరస్కరించారు — నిజమైన విక్రేతలు ఎప్పుడూ అంగీకరిస్తారు',
+            'ఉత్పత్తి చూపించే ముందే చెల్లింపు అడిగారు — ప్రధాన మోసం పద్ధతి',
+            'నేటి తేదీతో ఫోటో తీయడానికి నిరాకరించారు',
+            'అత్యవసరత వ్యూహాలు ఉపయోగించారు',
+            'పేజీ 1 నెల కంటే తక్కువ పాతది',
+            'ధరలు అసాధారణంగా తక్కువ',
+            'చెల్లింపు తర్వాత బ్లాక్ చేశారు',
+            'చెల్లింపు తర్వాత అదనపు చార్జీలు అడిగారు — అడ్వాన్స్ ఫీ మోసం',
         ],
         'guidance_high': [
             'ఇంకా డబ్బు పంపకండి',
-            'Instagram లో ఈ అకౌంట్‌ను బ్లాక్ చేసి రిపోర్ట్ చేయండి',
-            'ఇప్పటికే చెల్లించి ఉంటే cybercrime.gov.in లో రిపోర్ట్ చేయండి',
-            'అన్ని చాట్ స్క్రీన్‌షాట్‌లు సాక్ష్యంగా తీసుకోండి',
-            'మీ స్నేహితులకు మరియు కుటుంబానికి హెచ్చరించండి',
+            'Instagram లో బ్లాక్ చేసి రిపోర్ట్ చేయండి',
+            'cybercrime.gov.in లో రిపోర్ట్ చేయండి',
+            'అన్ని చాట్ స్క్రీన్‌షాట్‌లు సేవ్ చేయండి',
+            'స్నేహితులకు మరియు కుటుంబానికి హెచ్చరించండి',
         ],
-        'guidance_high_extra': 'అదనపు చార్జీలు చెల్లించడం ఆపండి — ప్రతి కొత్త చార్జ్ మరొక దోపిడీ',
+        'guidance_high_extra': 'అదనపు చార్జీలు చెల్లించడం ఆపండి',
         'guidance_medium': [
-            'విక్రేతను ఇప్పుడే ఉత్పత్తి చూపించే వీడియో కాల్ అడగండి',
-            'నేటి తేదీ కాగితంతో ఉత్పత్తి ఫోటో అడగండి',
+            'వీడియో కాల్ అడగండి',
+            'నేటి తేదీతో ఫోటో అడగండి',
             'ఉత్పత్తి చూడకుండా పూర్తి మొత్తం చెల్లించకండి',
-            'విక్రేత ఫోన్ నంబర్‌ను Truecaller లో వెతకండి',
-            'చెల్లించే ముందు అన్ని చాట్ స్క్రీన్‌షాట్‌లు సేవ్ చేయండి',
+            'Truecaller లో నంబర్ వెతకండి',
+            'అన్ని చాట్ స్క్రీన్‌షాట్‌లు సేవ్ చేయండి',
         ],
         'guidance_low': [
-            'జాగ్రత్తగా ముందుకు వెళ్ళండి — చివరి చెల్లింపు ముందు ధృవీకరించండి',
-            'వీలైతే ముందు పాక్షిక చెల్లింపు చేయండి',
-            'చెల్లించే ముందు అన్ని చాట్ స్క్రీన్‌షాట్‌లు సేవ్ చేయండి',
-            'మీ అంతర్మనస్సును నమ్మండి — తప్పు అనిపిస్తే అది తప్పే',
+            'జాగ్రత్తగా ముందుకు వెళ్ళండి',
+            'వీలైతే పాక్షిక చెల్లింపు చేయండి',
+            'చాట్ స్క్రీన్‌షాట్‌లు సేవ్ చేయండి',
+            'అంతర్మనస్సును నమ్మండి',
         ],
     },
     'hi': {
         'title': 'BuyShield — नकली विक्रेता पहचानकर्ता',
-        'header': '🛡️ BuyShield',
-        'subtitle': 'AI-संचालित नकली Instagram विक्रेता पहचान — भुगतान से पहले जांचें',
-        'intro': 'किसी भी Instagram विक्रेता को भुगतान करने से पहले इन 8 सरल प्रश्नों का उत्तर दें। BuyShield विक्रेता के व्यवहार का विश्लेषण करके आपको सेकंडों में जोखिम स्कोर देगा। मुफ्त। कोई पंजीकरण नहीं।',
+        'header': 'BuyShield',
+        'tagline': 'भुगतान से पहले जांचें',
+        'subtitle': 'नकली Instagram विक्रेताओं के खिलाफ AI सुरक्षा',
+        'intro': 'किसी भी Instagram विक्रेता को भुगतान करने से पहले इन 8 सरल प्रश्नों का उत्तर दें।',
+        'free': '100% मुफ्त',
+        'no_reg': 'कोई पंजीकरण नहीं',
+        'instant': 'तुरंत परिणाम',
         'form_title': 'विक्रेता के बारे में उत्तर दें',
         'submit': '🛡️ अभी जांचें',
         'check_again': '🔄 दूसरे विक्रेता की जांच करें',
-        'report': '🚨 cybercrime.gov.in पर इस धोखाधड़ी की रिपोर्ट करें',
+        'report': '🚨 cybercrime.gov.in पर रिपोर्ट करें',
         'red_flags': 'पहचाने गए खतरे',
-        'no_flags': '✅ कोई बड़ा खतरा नहीं पाया गया',
+        'no_flags': 'कोई बड़ा खतरा नहीं',
         'what_to_do': 'आपको क्या करना चाहिए',
-        'footer': 'BuyShield — निर्दोष भारतीय खरीदारों की रक्षा करता है 🛡️\nसंदेह हो तो — भुगतान न करें। सुरक्षित रहें।',
+        'footer_tagline': 'निर्दोष भारतीय खरीदारों की रक्षा करता है',
+        'footer_note': 'संदेह हो तो — भुगतान न करें।',
+        'disclaimer': 'BuyShield उपयोगकर्ता द्वारा रिपोर्ट किए गए संकेतों के आधार पर जोखिम मूल्यांकन प्रदान करता है। यह निश्चित आरोप नहीं है।',
         'questions': [
-            'क्या विक्रेता ने उत्पाद दिखाने वाली वीडियो कॉल से मना किया?',
+            'क्या विक्रेता ने वीडियो कॉल से मना किया?',
             'क्या उन्होंने उत्पाद दिखाने से पहले पूरा भुगतान मांगा?',
-            'क्या उन्होंने आज की तारीख वाले कागज के साथ उत्पाद की फोटो लेने से मना किया?',
-            'क्या उन्होंने "आज का ऑफर" या "आखिरी सामान" जैसी जल्दबाजी दिखाई?',
+            'क्या उन्होंने आज की तारीख वाली फोटो लेने से मना किया?',
+            'क्या उन्होंने "आज का ऑफर" जैसी जल्दबाजी दिखाई?',
             'क्या उनका Instagram पेज 1 महीने से कम पुराना है?',
-            'क्या उनकी कीमतें बाजार भाव से असामान्य रूप से कम हैं?',
-            'क्या भुगतान के बाद उन्होंने आपको ब्लॉक किया या चुप हो गए?',
-            'क्या भुगतान के बाद उन्होंने शिपिंग फीस या कस्टम चार्ज जैसे अतिरिक्त पैसे मांगे?',
+            'क्या उनकी कीमतें असामान्य रूप से कम हैं?',
+            'क्या भुगतान के बाद उन्होंने ब्लॉक किया?',
+            'क्या भुगतान के बाद अतिरिक्त पैसे मांगे?',
         ],
         'yes': 'हाँ',
         'no': 'नहीं',
-        'high_risk': 'उच्च जोखिम — इस विक्रेता को भुगतान न करें',
-        'caution': 'सावधानी — कई खतरे मिले। भुगतान से पहले सत्यापित करें।',
-        'low_risk': 'कम जोखिम — कम खतरे। फिर भी सावधानी से जांचें।',
+        'high_risk': 'उच्च जोखिम',
+        'high_risk_sub': 'भुगतान न करें',
+        'caution': 'सावधानी',
+        'caution_sub': 'भुगतान से पहले सत्यापित करें',
+        'low_risk': 'कम जोखिम',
+        'low_risk_sub': 'फिर भी सावधानी से जांचें',
         'flags': [
-            'विक्रेता ने वीडियो कॉल से मना किया — असली विक्रेता हमेशा उत्पाद दिखाने को तैयार रहते हैं',
-            'उत्पाद दिखाए बिना भुगतान मांगा — यह मुख्य धोखाधड़ी तरीका है',
-            'आज की तारीख के साथ फोटो लेने से मना किया — उत्पाद का अस्तित्व नहीं है',
-            'जल्दबाजी की रणनीति इस्तेमाल की — आपको सोचने से रोकने के लिए',
-            'Instagram पेज 1 महीने से कम पुराना — धोखेबाज जल्दी भागना चाहते हैं',
-            'कीमतें असामान्य रूप से कम — धोखेबाज लालच देने के लिए कम कीमत रखते हैं',
-            'भुगतान के बाद ब्लॉक किया — पुष्टि की गई धोखाधड़ी',
-            'भुगतान के बाद अतिरिक्त शुल्क मांगा — यह एडवांस फी धोखाधड़ी है। तुरंत भुगतान बंद करें।',
+            'वीडियो कॉल से मना किया — असली विक्रेता हमेशा तैयार रहते हैं',
+            'उत्पाद दिखाए बिना भुगतान मांगा — मुख्य धोखाधड़ी तरीका',
+            'आज की तारीख वाली फोटो से मना किया',
+            'जल्दबाजी की रणनीति इस्तेमाल की',
+            'पेज 1 महीने से कम पुराना',
+            'कीमतें असामान्य रूप से कम',
+            'भुगतान के बाद ब्लॉक किया',
+            'भुगतान के बाद अतिरिक्त शुल्क मांगा — एडवांस फी धोखाधड़ी',
         ],
         'guidance_high': [
             'अब और पैसे न भेजें',
-            'Instagram पर इस अकाउंट को ब्लॉक करें और रिपोर्ट करें',
-            'अगर पहले ही भुगतान किया है तो cybercrime.gov.in पर रिपोर्ट करें',
-            'सबूत के तौर पर सभी चैट स्क्रीनशॉट लें',
-            'अपने दोस्तों और परिवार को इस पेज के बारे में चेतावनी दें',
+            'Instagram पर ब्लॉक करें और रिपोर्ट करें',
+            'cybercrime.gov.in पर रिपोर्ट करें',
+            'सभी चैट स्क्रीनशॉट सेव करें',
+            'दोस्तों और परिवार को चेतावनी दें',
         ],
-        'guidance_high_extra': 'अतिरिक्त शुल्क देना बंद करें — हर नया शुल्क एक और चोरी है',
+        'guidance_high_extra': 'अतिरिक्त शुल्क देना बंद करें',
         'guidance_medium': [
-            'विक्रेता से अभी उत्पाद दिखाने वाली वीडियो कॉल मांगें',
-            'आज की तारीख वाले कागज के साथ उत्पाद की फोटो मांगें',
+            'वीडियो कॉल मांगें',
+            'आज की तारीख वाली फोटो मांगें',
             'उत्पाद देखे बिना पूरा भुगतान न करें',
-            'विक्रेता का फोन नंबर Truecaller पर खोजें',
-            'भुगतान से पहले सभी चैट स्क्रीनशॉट सेव करें',
+            'Truecaller पर नंबर खोजें',
+            'सभी चैट स्क्रीनशॉट सेव करें',
         ],
         'guidance_low': [
-            'सावधानी से आगे बढ़ें — अंतिम भुगतान से पहले सत्यापित करें',
-            'हो सके तो पहले आंशिक भुगतान करें',
-            'भुगतान से पहले सभी चैट स्क्रीनशॉट सेव करें',
-            'अपनी अंतरात्मा पर भरोसा करें — गलत लगे तो गलत ही है',
+            'सावधानी से आगे बढ़ें',
+            'पहले आंशिक भुगतान करें',
+            'चैट स्क्रीनशॉट सेव करें',
+            'अंतरात्मा पर भरोसा करें',
         ],
     }
 }
 
-# ─── Scoring Engine ───
 def calculate_risk_score(answers):
     score = 0
     flag_indices = []
-
     checks = [
         ('refused_video_call', 25),
         ('payment_before_product', 20),
@@ -201,24 +225,19 @@ def calculate_risk_score(answers):
         ('blocked_after_payment', 20),
         ('extra_charges_after_payment', 25),
     ]
-
     for i, (key, points) in enumerate(checks):
         if answers.get(key):
             score += points
             flag_indices.append(i)
-
-    score = min(score, 100)
-    return score, flag_indices
-
+    return min(score, 100), flag_indices
 
 def get_verdict_key(score):
     if score >= 70:
-        return 'high_risk', 'red'
+        return 'high_risk', 'high_risk_sub', 'red'
     elif score >= 35:
-        return 'caution', 'orange'
+        return 'caution', 'caution_sub', 'orange'
     else:
-        return 'low_risk', 'green'
-
+        return 'low_risk', 'low_risk_sub', 'green'
 
 def get_guidance(score, answers, lang):
     t = TRANSLATIONS[lang]
@@ -232,100 +251,343 @@ def get_guidance(score, answers, lang):
     else:
         return t['guidance_low']
 
-
-# ─── HTML Template ───
 HTML = """
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ t.title }}</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: Arial, sans-serif; background: #0f0f1a; color: #ffffff; min-height: 100vh; }
+        :root[data-theme="dark"] {
+            --bg: #0a0a14;
+            --surface: #12122a;
+            --surface2: #1a1a3a;
+            --border: #2a2a5a;
+            --text: #ffffff;
+            --text2: #a0a0c0;
+            --text3: #6060a0;
+            --accent: #e94560;
+            --accent2: #ff6b6b;
+            --green: #00d4a0;
+            --orange: #ffa500;
+            --red: #ff4444;
+            --shield: #4a90e2;
+        }
+        :root[data-theme="light"] {
+            --bg: #f0f2f8;
+            --surface: #ffffff;
+            --surface2: #f5f7ff;
+            --border: #dde2f0;
+            --text: #1a1a3a;
+            --text2: #4a4a7a;
+            --text3: #8888aa;
+            --accent: #e94560;
+            --accent2: #cc3355;
+            --green: #00a87a;
+            --orange: #e08800;
+            --red: #cc2222;
+            --shield: #2266cc;
+        }
 
-        .header { background: #1a1a2e; padding: 20px; text-align: center; border-bottom: 3px solid #e94560; }
-        .header h1 { font-size: 28px; color: #e94560; }
-        .header p { color: #cccccc; margin-top: 6px; font-size: 14px; }
+        * { margin: 0; padding: 0; box-sizing: border-box; transition: background 0.3s, color 0.3s; }
+        body { font-family: 'Segoe UI', Arial, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
 
-        .lang-bar { background: #16213e; padding: 12px; text-align: center; }
-        .lang-btn { display: inline-block; margin: 0 6px; padding: 8px 20px; border-radius: 20px; text-decoration: none; font-size: 13px; font-weight: bold; border: 2px solid #e94560; color: #e94560; background: transparent; cursor: pointer; }
-        .lang-btn.active { background: #e94560; color: white; }
-        .lang-btn:hover { background: #e94560; color: white; }
+        /* ── HEADER ── */
+        .header {
+            background: var(--surface);
+            border-bottom: 1px solid var(--border);
+            padding: 0 24px;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+        }
+        .logo { display: flex; align-items: center; gap: 10px; }
+        .logo-icon {
+            width: 36px; height: 36px;
+            background: linear-gradient(135deg, var(--accent), var(--accent2));
+            border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 18px;
+        }
+        .logo-text { font-size: 20px; font-weight: 800; color: var(--text); }
+        .logo-text span { color: var(--accent); }
 
-        .container { max-width: 700px; margin: 30px auto; padding: 0 20px; }
+        .header-right { display: flex; align-items: center; gap: 12px; }
 
-        .intro-card { background: #1a1a2e; border-radius: 12px; padding: 20px; margin-bottom: 25px; border-left: 4px solid #e94560; }
-        .intro-card p { color: #cccccc; line-height: 1.6; font-size: 14px; }
+        /* Language buttons */
+        .lang-group { display: flex; gap: 4px; background: var(--surface2); padding: 4px; border-radius: 8px; }
+        .lang-btn {
+            padding: 5px 12px; border-radius: 6px; font-size: 12px; font-weight: 600;
+            text-decoration: none; color: var(--text2); border: none; background: transparent; cursor: pointer;
+        }
+        .lang-btn.active { background: var(--accent); color: white; }
+        .lang-btn:hover:not(.active) { background: var(--border); color: var(--text); }
 
-        .form-card { background: #1a1a2e; border-radius: 12px; padding: 25px; margin-bottom: 25px; }
-        .form-card h2 { color: #e94560; margin-bottom: 20px; font-size: 18px; }
+        /* Theme toggle */
+        .theme-toggle {
+            width: 40px; height: 40px; border-radius: 10px;
+            background: var(--surface2); border: 1px solid var(--border);
+            cursor: pointer; display: flex; align-items: center; justify-content: center;
+            font-size: 18px; color: var(--text2);
+        }
+        .theme-toggle:hover { background: var(--border); }
 
-        .question { margin-bottom: 20px; padding: 15px; background: #16213e; border-radius: 10px; }
-        .question p { font-size: 14px; color: #ffffff; margin-bottom: 12px; line-height: 1.5; }
-        .question label { display: inline-flex; align-items: center; margin-right: 20px; cursor: pointer; font-size: 14px; color: #cccccc; }
-        .question input[type=radio] { margin-right: 6px; accent-color: #e94560; width: 16px; height: 16px; }
+        /* ── HERO ── */
+        .hero {
+            background: linear-gradient(135deg, var(--surface) 0%, var(--surface2) 100%);
+            border-bottom: 1px solid var(--border);
+            padding: 48px 24px;
+            text-align: center;
+        }
+        .hero-badge {
+            display: inline-flex; align-items: center; gap: 6px;
+            background: rgba(233,69,96,0.1); border: 1px solid rgba(233,69,96,0.3);
+            color: var(--accent); padding: 6px 14px; border-radius: 20px;
+            font-size: 12px; font-weight: 600; margin-bottom: 20px;
+        }
+        .hero h1 { font-size: 36px; font-weight: 900; margin-bottom: 12px; line-height: 1.2; }
+        .hero h1 span { color: var(--accent); }
+        .hero p { color: var(--text2); font-size: 16px; max-width: 500px; margin: 0 auto 28px; }
 
-        .submit-btn { width: 100%; padding: 16px; background: #e94560; color: white; border: none; border-radius: 10px; font-size: 18px; font-weight: bold; cursor: pointer; margin-top: 10px; }
-        .submit-btn:hover { background: #c73652; }
+        .hero-stats { display: flex; justify-content: center; gap: 32px; flex-wrap: wrap; }
+        .stat { display: flex; align-items: center; gap: 8px; color: var(--text2); font-size: 13px; }
+        .stat-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--green); }
 
-        .result-card { border-radius: 12px; padding: 25px; margin-bottom: 20px; }
-        .result-red { background: #2d0a0a; border: 2px solid #cc2936; }
-        .result-orange { background: #2d1a00; border: 2px solid #f5a623; }
-        .result-green { background: #0a2d1a; border: 2px solid #02a676; }
+        /* ── MAIN CONTAINER ── */
+        .container { max-width: 680px; margin: 0 auto; padding: 32px 20px; }
 
-        .score-display { text-align: center; margin-bottom: 20px; }
-        .score-number { font-size: 64px; font-weight: bold; }
-        .score-red { color: #cc2936; }
-        .score-orange { color: #f5a623; }
-        .score-green { color: #02a676; }
-        .verdict { font-size: 20px; font-weight: bold; margin-top: 8px; }
+        /* ── QUESTION CARD ── */
+        .form-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 28px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+        }
+        .form-card h2 {
+            font-size: 16px; font-weight: 700; color: var(--text);
+            margin-bottom: 24px; padding-bottom: 16px;
+            border-bottom: 1px solid var(--border);
+            display: flex; align-items: center; gap: 8px;
+        }
+        .form-card h2::before { content: '📋'; }
 
-        .flags-section { margin-top: 20px; }
-        .flags-section h3 { margin-bottom: 12px; color: #ffffff; font-size: 16px; }
-        .flag-item { background: rgba(204,41,54,0.15); border-left: 3px solid #cc2936; padding: 10px 14px; margin-bottom: 8px; border-radius: 6px; font-size: 13px; color: #ffcccc; line-height: 1.5; }
+        .question {
+            padding: 16px;
+            background: var(--surface2);
+            border-radius: 12px;
+            margin-bottom: 12px;
+            border: 1px solid var(--border);
+            transition: border-color 0.2s;
+        }
+        .question:hover { border-color: var(--accent); }
+        .question-num {
+            font-size: 10px; font-weight: 700; color: var(--accent);
+            text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px;
+        }
+        .question p { font-size: 14px; color: var(--text); line-height: 1.5; margin-bottom: 14px; font-weight: 500; }
 
-        .guidance-section { margin-top: 20px; }
-        .guidance-section h3 { margin-bottom: 12px; color: #ffffff; font-size: 16px; }
-        .guidance-item { background: #16213e; padding: 10px 14px; margin-bottom: 8px; border-radius: 6px; font-size: 13px; color: #cccccc; line-height: 1.5; }
-        .guidance-item::before { content: "✅ "; }
+        .radio-group { display: flex; gap: 10px; }
+        .radio-option {
+            flex: 1; padding: 10px; border-radius: 8px;
+            border: 2px solid var(--border); cursor: pointer;
+            display: flex; align-items: center; justify-content: center; gap: 6px;
+            font-size: 13px; font-weight: 600; color: var(--text2);
+            transition: all 0.2s;
+        }
+        .radio-option input { display: none; }
+        .radio-option:hover { border-color: var(--accent); color: var(--accent); }
+        .radio-option.yes-opt:hover { background: rgba(233,69,96,0.08); }
+        .radio-option.no-opt:hover { background: rgba(0,212,160,0.08); border-color: var(--green); color: var(--green); }
+        .radio-option input:checked + .radio-label { font-weight: 700; }
+        .radio-option:has(input:checked).yes-opt { border-color: var(--accent); background: rgba(233,69,96,0.12); color: var(--accent); }
+        .radio-option:has(input:checked).no-opt { border-color: var(--green); background: rgba(0,212,160,0.12); color: var(--green); }
 
-        .report-link { display: block; text-align: center; margin-top: 20px; padding: 14px; background: #e94560; color: white; border-radius: 10px; text-decoration: none; font-weight: bold; font-size: 15px; }
-        .check-again { display: block; text-align: center; margin-top: 12px; padding: 14px; background: #16213e; color: #e94560; border-radius: 10px; text-decoration: none; font-weight: bold; font-size: 15px; border: 2px solid #e94560; }
+        /* ── SUBMIT BUTTON ── */
+        .submit-btn {
+            width: 100%; padding: 16px;
+            background: linear-gradient(135deg, var(--accent), var(--accent2));
+            color: white; border: none; border-radius: 14px;
+            font-size: 17px; font-weight: 700; cursor: pointer;
+            box-shadow: 0 4px 20px rgba(233,69,96,0.35);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .submit-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 28px rgba(233,69,96,0.45); }
+        .submit-btn:active { transform: translateY(0); }
 
-        .footer { text-align: center; padding: 20px; color: #666; font-size: 12px; margin-top: 20px; }
+        /* ── RESULT ── */
+        .result-hero {
+            border-radius: 20px; padding: 32px;
+            text-align: center; margin-bottom: 20px;
+            border: 1px solid var(--border);
+        }
+        .result-red { background: linear-gradient(135deg, rgba(255,68,68,0.08), rgba(255,68,68,0.03)); border-color: rgba(255,68,68,0.3); }
+        .result-orange { background: linear-gradient(135deg, rgba(255,165,0,0.08), rgba(255,165,0,0.03)); border-color: rgba(255,165,0,0.3); }
+        .result-green { background: linear-gradient(135deg, rgba(0,212,160,0.08), rgba(0,212,160,0.03)); border-color: rgba(0,212,160,0.3); }
+
+        .score-ring {
+            width: 140px; height: 140px; border-radius: 50%;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            margin: 0 auto 20px;
+            border: 6px solid var(--border);
+            position: relative;
+        }
+        .score-ring.red { border-color: var(--red); box-shadow: 0 0 30px rgba(255,68,68,0.25); }
+        .score-ring.orange { border-color: var(--orange); box-shadow: 0 0 30px rgba(255,165,0,0.25); }
+        .score-ring.green { border-color: var(--green); box-shadow: 0 0 30px rgba(0,212,160,0.25); }
+
+        .score-num { font-size: 48px; font-weight: 900; line-height: 1; }
+        .score-num.red { color: var(--red); }
+        .score-num.orange { color: var(--orange); }
+        .score-num.green { color: var(--green); }
+        .score-label { font-size: 12px; color: var(--text3); }
+
+        .verdict-badge {
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: 10px 24px; border-radius: 30px;
+            font-size: 18px; font-weight: 800; margin-bottom: 8px;
+        }
+        .verdict-badge.red { background: rgba(255,68,68,0.15); color: var(--red); }
+        .verdict-badge.orange { background: rgba(255,165,0,0.15); color: var(--orange); }
+        .verdict-badge.green { background: rgba(0,212,160,0.15); color: var(--green); }
+        .verdict-sub { color: var(--text2); font-size: 14px; }
+
+        /* ── FLAGS + GUIDANCE ── */
+        .section-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px; padding: 22px;
+            margin-bottom: 16px;
+        }
+        .section-title {
+            font-size: 14px; font-weight: 700; color: var(--text);
+            margin-bottom: 14px; display: flex; align-items: center; gap: 8px;
+        }
+        .flag-item {
+            padding: 12px 14px; margin-bottom: 8px;
+            background: rgba(255,68,68,0.06);
+            border-left: 3px solid var(--red);
+            border-radius: 0 8px 8px 0;
+            font-size: 13px; color: var(--text2); line-height: 1.5;
+        }
+        .guidance-item {
+            padding: 12px 14px; margin-bottom: 8px;
+            background: var(--surface2);
+            border-radius: 8px;
+            font-size: 13px; color: var(--text2); line-height: 1.5;
+            display: flex; align-items: flex-start; gap: 8px;
+        }
+        .guidance-item::before { content: "✅"; flex-shrink: 0; }
+
+        /* ── BUTTONS ── */
+        .btn-report {
+            display: block; text-align: center; padding: 14px;
+            background: linear-gradient(135deg, var(--accent), var(--accent2));
+            color: white; border-radius: 12px; text-decoration: none;
+            font-weight: 700; font-size: 15px; margin-bottom: 12px;
+            box-shadow: 0 4px 16px rgba(233,69,96,0.3);
+        }
+        .btn-check-again {
+            display: block; text-align: center; padding: 14px;
+            background: var(--surface); color: var(--accent);
+            border-radius: 12px; text-decoration: none;
+            font-weight: 700; font-size: 15px;
+            border: 2px solid var(--accent);
+        }
+
+        /* ── DISCLAIMER ── */
+        .disclaimer {
+            text-align: center; padding: 16px;
+            color: var(--text3); font-size: 11px; line-height: 1.6;
+            border-top: 1px solid var(--border); margin-top: 20px;
+        }
+
+        /* ── FOOTER ── */
+        .footer {
+            text-align: center; padding: 24px;
+            border-top: 1px solid var(--border);
+            color: var(--text3); font-size: 12px;
+            background: var(--surface);
+        }
+        .footer strong { color: var(--accent); }
+
+        /* ── MOBILE ── */
+        @media (max-width: 480px) {
+            .hero h1 { font-size: 26px; }
+            .hero-stats { gap: 16px; }
+            .lang-group { display: none; }
+            .header { padding: 0 16px; }
+            .container { padding: 20px 14px; }
+            .score-ring { width: 120px; height: 120px; }
+            .score-num { font-size: 40px; }
+        }
     </style>
 </head>
 <body>
 
-<div class="header">
-    <h1>{{ t.header }}</h1>
-    <p>{{ t.subtitle }}</p>
-</div>
+<!-- HEADER -->
+<header class="header">
+    <div class="logo">
+        <div class="logo-icon">🛡️</div>
+        <span class="logo-text">Buy<span>Shield</span></span>
+    </div>
+    <div class="header-right">
+        <div class="lang-group">
+            <a href="/?lang=en{% if result %}&result=1{% endif %}" class="lang-btn {% if lang == 'en' %}active{% endif %}">EN</a>
+            <a href="/?lang=te{% if result %}&result=1{% endif %}" class="lang-btn {% if lang == 'te' %}active{% endif %}">తెలుగు</a>
+            <a href="/?lang=hi{% if result %}&result=1{% endif %}" class="lang-btn {% if lang == 'hi' %}active{% endif %}">हिंदी</a>
+        </div>
+        <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn">🌙</button>
+    </div>
+</header>
 
-<div class="lang-bar">
-    <a href="/?lang=en" class="lang-btn {% if lang == 'en' %}active{% endif %}">English</a>
-    <a href="/?lang=te" class="lang-btn {% if lang == 'te' %}active{% endif %}">తెలుగు</a>
-    <a href="/?lang=hi" class="lang-btn {% if lang == 'hi' %}active{% endif %}">हिंदी</a>
+<!-- HERO -->
+<div class="hero">
+    <div class="hero-badge">🇮🇳 Made for India</div>
+    <h1>{{ t.header }} — <span>{{ t.tagline }}</span></h1>
+    <p>{{ t.subtitle }}</p>
+    <div class="hero-stats">
+        <div class="stat"><div class="stat-dot"></div>{{ t.free }}</div>
+        <div class="stat"><div class="stat-dot"></div>{{ t.no_reg }}</div>
+        <div class="stat"><div class="stat-dot"></div>{{ t.instant }}</div>
+    </div>
 </div>
 
 <div class="container">
 
 {% if not result %}
-<div class="intro-card">
-    <p>{{ t.intro }}</p>
+
+<!-- INTRO -->
+<div class="form-card" style="margin-bottom:20px; padding: 20px;">
+    <p style="color: var(--text2); font-size: 14px; line-height: 1.7;">{{ t.intro }}</p>
 </div>
 
+<!-- FORM -->
 <form method="POST" action="/check?lang={{ lang }}">
 <div class="form-card">
     <h2>{{ t.form_title }}</h2>
 
     {% for i in range(8) %}
     <div class="question">
-        <p>{{ i+1 }}. {{ t.questions[i] }}</p>
-        <label><input type="radio" name="q{{ i }}" value="yes" required> {{ t.yes }}</label>
-        <label><input type="radio" name="q{{ i }}" value="no"> {{ t.no }}</label>
+        <div class="question-num">Question {{ i+1 }} of 8</div>
+        <p>{{ t.questions[i] }}</p>
+        <div class="radio-group">
+            <label class="radio-option yes-opt">
+                <input type="radio" name="q{{ i }}" value="yes" required>
+                <span class="radio-label">⚠️ {{ t.yes }}</span>
+            </label>
+            <label class="radio-option no-opt">
+                <input type="radio" name="q{{ i }}" value="no">
+                <span class="radio-label">✅ {{ t.no }}</span>
+            </label>
+        </div>
     </div>
     {% endfor %}
 
@@ -334,52 +596,96 @@ HTML = """
 </form>
 
 {% else %}
-<div class="result-card result-{{ color }}">
-    <div class="score-display">
-        <div class="score-number score-{{ color }}">{{ score }}<span style="font-size:28px">/100</span></div>
-        <div class="verdict" style="color: {% if color == 'red' %}#cc2936{% elif color == 'orange' %}#f5a623{% else %}#02a676{% endif %}">
-            {{ verdict }}
-        </div>
-    </div>
 
-    {% if flags %}
-    <div class="flags-section">
-        <h3>⚠️ {{ t.red_flags }} ({{ flags|length }})</h3>
-        {% for flag in flags %}
-        <div class="flag-item">{{ flag }}</div>
-        {% endfor %}
+<!-- RESULT HERO -->
+<div class="result-hero result-{{ color }}">
+    <div class="score-ring {{ color }}">
+        <div class="score-num {{ color }}">{{ score }}</div>
+        <div class="score-label">/100</div>
     </div>
-    {% else %}
-    <div class="flags-section">
-        <h3>{{ t.no_flags }}</h3>
+    <div class="verdict-badge {{ color }}">
+        {% if color == 'red' %}🔴{% elif color == 'orange' %}🟡{% else %}🟢{% endif %}
+        {{ verdict }}
     </div>
-    {% endif %}
+    <div class="verdict-sub">{{ verdict_sub }}</div>
+</div>
 
-    <div class="guidance-section">
-        <h3>{{ t.what_to_do }}</h3>
-        {% for g in guidance %}
-        <div class="guidance-item">{{ g }}</div>
-        {% endfor %}
-    </div>
-
-    {% if score >= 70 %}
-    <a href="https://cybercrime.gov.in" target="_blank" class="report-link">{{ t.report }}</a>
-    {% endif %}
-
-    <a href="/?lang={{ lang }}" class="check-again">{{ t.check_again }}</a>
+<!-- FLAGS -->
+{% if flags %}
+<div class="section-card">
+    <div class="section-title">⚠️ {{ t.red_flags }} ({{ flags|length }})</div>
+    {% for flag in flags %}
+    <div class="flag-item">{{ flag }}</div>
+    {% endfor %}
+</div>
+{% else %}
+<div class="section-card">
+    <div class="section-title">✅ {{ t.no_flags }}</div>
 </div>
 {% endif %}
 
-<div class="footer">
-    {{ t.footer }}
+<!-- GUIDANCE -->
+<div class="section-card">
+    <div class="section-title">💡 {{ t.what_to_do }}</div>
+    {% for g in guidance %}
+    <div class="guidance-item">{{ g }}</div>
+    {% endfor %}
 </div>
 
+<!-- BUTTONS -->
+{% if score >= 70 %}
+<a href="https://cybercrime.gov.in" target="_blank" class="btn-report">{{ t.report }}</a>
+{% endif %}
+<a href="/?lang={{ lang }}" class="btn-check-again">{{ t.check_again }}</a>
+
+{% endif %}
+
+<!-- DISCLAIMER -->
+<div class="disclaimer">{{ t.disclaimer }}</div>
+
 </div>
+
+<!-- FOOTER -->
+<footer class="footer">
+    <strong>BuyShield</strong> — {{ t.footer_tagline }}<br>
+    {{ t.footer_note }}
+</footer>
+
+<script>
+    // Theme toggle
+    function toggleTheme() {
+        const html = document.documentElement;
+        const btn = document.getElementById('themeBtn');
+        if (html.getAttribute('data-theme') === 'dark') {
+            html.setAttribute('data-theme', 'light');
+            btn.textContent = '🌙';
+            localStorage.setItem('theme', 'light');
+        } else {
+            html.setAttribute('data-theme', 'dark');
+            btn.textContent = '☀️';
+            localStorage.setItem('theme', 'dark');
+        }
+    }
+
+    // Load saved theme
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+    document.getElementById('themeBtn').textContent = savedTheme === 'dark' ? '☀️' : '🌙';
+
+    // Highlight selected radio options
+    document.querySelectorAll('.radio-option input').forEach(input => {
+        input.addEventListener('change', function() {
+            const group = this.closest('.radio-group');
+            group.querySelectorAll('.radio-option').forEach(opt => opt.classList.remove('selected'));
+            this.closest('.radio-option').classList.add('selected');
+        });
+    });
+</script>
+
 </body>
 </html>
 """
 
-# ─── Routes ───
 @app.route("/")
 def home():
     lang = request.args.get('lang', 'en')
@@ -387,7 +693,6 @@ def home():
         lang = 'en'
     t = TRANSLATIONS[lang]
     return render_template_string(HTML, result=False, t=t, lang=lang)
-
 
 @app.route("/check", methods=["POST"])
 def check():
@@ -408,8 +713,9 @@ def check():
     }
 
     score, flag_indices = calculate_risk_score(answers)
-    verdict_key, color = get_verdict_key(score)
+    verdict_key, verdict_sub_key, color = get_verdict_key(score)
     verdict = t[verdict_key]
+    verdict_sub = t[verdict_sub_key]
     flags = [t['flags'][i] for i in flag_indices]
     guidance = get_guidance(score, answers, lang)
 
@@ -418,12 +724,12 @@ def check():
         score=score,
         flags=flags,
         verdict=verdict,
+        verdict_sub=verdict_sub,
         color=color,
         guidance=guidance,
         t=t,
         lang=lang
     )
-
 
 if __name__ == "__main__":
     app.run()
