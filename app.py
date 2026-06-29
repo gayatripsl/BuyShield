@@ -70,6 +70,18 @@ TRANSLATIONS = {
         'caution_sub': 'Verify before paying',
         'low_risk': 'LOW RISK',
         'low_risk_sub': 'Proceed carefully',
+        'why_title': 'Why This Matters',
+        'why_items': [
+            'Scammers often target buyers who feel rushed or excited about a deal.',
+            'Most scams ask for full payment before any proof the product is real.',
+            'A few seconds of checking can save you from losing your money.',
+        ],
+        'live_badge': 'LIVE',
+        'live_hint': 'Updates instantly as you answer the questions below',
+        'answered_label': 'Questions Answered',
+        'about_p1': 'BuyShield is a free, independent safety tool built to help everyday online shoppers spot fake sellers before they pay — especially on Instagram, where most India-based shopping scams now happen.',
+        'about_p2': "We're not affiliated with Instagram, Meta, or any government body. Our AI model looks for common behaviour patterns reported by real scam victims, but it is a guide — not a guarantee. Always trust your own judgement and verify before you pay.",
+        'about_helpline': "If you've already been scammed, call India's National Cyber Crime Helpline at 1930 (24x7) or report it at cybercrime.gov.in",
         'questions': [
             'Did the seller REFUSE a video call showing the product?',
             'Did they demand FULL PAYMENT before showing the actual product?',
@@ -174,6 +186,18 @@ TRANSLATIONS = {
         'caution_sub': 'చెల్లించే ముందు ధృవీకరించండి',
         'low_risk': 'తక్కువ ప్రమాదం',
         'low_risk_sub': 'జాగ్రత్తగా ముందుకు వెళ్ళండి',
+        'why_title': 'ఇది ఎందుకు ముఖ్యం',
+        'why_items': [
+            'తొందరపడేలా లేదా ఆఫర్‌తో ఉత్సాహపరిచే కొనుగోలుదారులను స్కామర్లు లక్ష్యంగా చేసుకుంటారు.',
+            'చాలా స్కామ్‌లు ఉత్పత్తి నిజమైనదని రుజువు చూపకుండానే పూర్తి చెల్లింపు అడుగుతాయి.',
+            'కొన్ని సెకన్ల తనిఖీ మీ డబ్బును కాపాడగలదు.',
+        ],
+        'live_badge': 'లైవ్',
+        'live_hint': 'మీరు దిగువ ప్రశ్నలకు సమాధానం ఇస్తున్నప్పుడు తక్షణమే అప్‌డేట్ అవుతుంది',
+        'answered_label': 'సమాధానం ఇచ్చిన ప్రశ్నలు',
+        'about_p1': 'BuyShield అనేది ఆన్‌లైన్ కొనుగోలుదారులు చెల్లించే ముందు నకిలీ విక్రేతలను గుర్తించడంలో సహాయపడే ఉచిత, స్వతంత్ర భద్రతా టూల్ — ప్రత్యేకించి Instagram లో, ఇప్పుడు భారతదేశంలో ఎక్కువ షాపింగ్ స్కామ్‌లు జరుగుతున్నాయి.',
+        'about_p2': 'మేము Instagram, Meta లేదా ఏ ప్రభుత్వ సంస్థతో సంబంధం లేదు. మా AI మోడల్ నిజమైన బాధితులు నివేదించిన సాధారణ ప్రవర్తన నమూనాలను చూస్తుంది, కానీ ఇది ఒక గైడ్ మాత్రమే — హామీ కాదు. ఎల్లప్పుడూ మీ స్వంత తీర్పును నమ్మండి మరియు చెల్లించే ముందు ధృవీకరించండి.',
+        'about_helpline': 'మీరు ఇప్పటికే మోసపోయినట్లయితే, భారతదేశ నేషనల్ సైబర్ క్రైమ్ హెల్ప్‌లైన్ 1930 (24x7) కు కాల్ చేయండి లేదా cybercrime.gov.in లో రిపోర్ట్ చేయండి',
         'questions': [
             'విక్రేత వీడియో కాల్‌ను తిరస్కరించారా?',
             'ఉత్పత్తి చూపించే ముందే పూర్తి చెల్లింపు డిమాండ్ చేశారా?',
@@ -278,6 +302,18 @@ TRANSLATIONS = {
         'caution_sub': 'भुगतान से पहले सत्यापित करें',
         'low_risk': 'कम जोखिम',
         'low_risk_sub': 'सावधानी से आगे बढ़ें',
+        'why_title': 'यह क्यों ज़रूरी है',
+        'why_items': [
+            'स्कैमर अक्सर उन खरीदारों को निशाना बनाते हैं जो जल्दी में हों या ऑफर से उत्साहित हों।',
+            'ज्यादातर स्कैम में उत्पाद असली होने का सबूत दिए बिना पूरा भुगतान मांगा जाता है।',
+            'कुछ सेकंड की जांच आपके पैसे बचा सकती है।',
+        ],
+        'live_badge': 'लाइव',
+        'live_hint': 'जैसे ही आप नीचे प्रश्नों के उत्तर देंगे, यह तुरंत अपडेट होगा',
+        'answered_label': 'उत्तर दिए गए प्रश्न',
+        'about_p1': 'BuyShield एक मुफ्त, स्वतंत्र सुरक्षा टूल है जो ऑनलाइन खरीदारों को भुगतान करने से पहले नकली विक्रेताओं को पहचानने में मदद करता है — खासकर Instagram पर, जहां अब भारत में ज्यादातर शॉपिंग स्कैम होते हैं।',
+        'about_p2': 'हम Instagram, Meta या किसी सरकारी संस्था से संबद्ध नहीं हैं। हमारा AI मॉडल असली पीड़ितों द्वारा रिपोर्ट किए गए सामान्य व्यवहार पैटर्न देखता है, लेकिन यह एक गाइड है — गारंटी नहीं। हमेशा अपने विवेक पर भरोसा करें और भुगतान से पहले सत्यापित करें।',
+        'about_helpline': 'यदि आपके साथ पहले ही धोखाधड़ी हो चुकी है, तो भारत की नेशनल साइबर क्राइम हेल्पलाइन 1930 (24x7) पर कॉल करें या cybercrime.gov.in पर रिपोर्ट करें',
         'questions': [
             'क्या विक्रेता ने वीडियो कॉल से मना किया?',
             'क्या उन्होंने उत्पाद दिखाने से पहले पूरा भुगतान मांगा?',
@@ -528,7 +564,7 @@ body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg); co
 }
 
 /* ── CONTENT ── */
-.content { padding:24px; flex:1; max-width:1100px; }
+.content { padding:24px; flex:1; max-width:1300px; margin:0 auto; width:100%; }
 
 /* ── HERO ── */
 .hero { display:flex; align-items:center; justify-content:space-between; margin-bottom:28px; }
@@ -541,7 +577,7 @@ body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg); co
 .hero-shield { font-size:120px; opacity:0.9; filter:drop-shadow(0 0 40px rgba(124,92,252,0.4)); }
 
 /* ── FORM GRID ── */
-.form-grid { display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-bottom:20px; }
+.form-grid { display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-bottom:20px; align-items:start; }
 
 /* ── CARDS ── */
 .card {
@@ -611,29 +647,36 @@ body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg); co
 /* ── RISK PANEL (right side) ── */
 .risk-panel { background:var(--surface); border:1px solid var(--border); border-radius:16px; padding:20px; }
 .risk-score-label { font-size:11px; font-weight:700; color:var(--text2); text-transform:uppercase; letter-spacing:1px; margin-bottom:12px; display:flex; align-items:center; gap:6px; }
+.live-tag { margin-left:auto; font-size:9px; font-weight:800; letter-spacing:0.5px; background:var(--accent); color:white; padding:3px 8px; border-radius:20px; display:inline-flex; align-items:center; gap:4px; }
+.live-dot { width:6px; height:6px; border-radius:50%; background:white; display:inline-block; animation:pulse 1.4s infinite; }
+@keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:0.3;} }
 .score-ring-wrap { display:flex; flex-direction:column; align-items:center; margin-bottom:16px; }
 .score-ring {
     width:120px; height:120px; border-radius:50%; border:8px solid var(--border);
     display:flex; flex-direction:column; align-items:center; justify-content:center;
-    margin-bottom:10px; position:relative;
+    margin-bottom:10px; position:relative; transition:border-color 0.3s, box-shadow 0.3s;
 }
 .score-ring.red { border-color:var(--red); box-shadow:0 0 24px rgba(255,71,87,0.3); }
 .score-ring.orange { border-color:var(--orange); box-shadow:0 0 24px rgba(255,165,2,0.3); }
 .score-ring.green { border-color:var(--green); box-shadow:0 0 24px rgba(46,213,115,0.3); }
-.score-num { font-size:40px; font-weight:900; line-height:1; }
+.score-num { font-size:40px; font-weight:900; line-height:1; transition:color 0.3s; }
 .score-num.red { color:var(--red); }
 .score-num.orange { color:var(--orange); }
 .score-num.green { color:var(--green); }
 .score-denom { font-size:12px; color:var(--text2); }
 .verdict-pill {
     padding:6px 16px; border-radius:20px; font-size:13px; font-weight:800;
-    margin-bottom:4px;
+    margin-bottom:4px; transition:background 0.3s, color 0.3s;
 }
 .verdict-pill.red { background:rgba(255,71,87,0.15); color:var(--red); }
 .verdict-pill.orange { background:rgba(255,165,2,0.15); color:var(--orange); }
 .verdict-pill.green { background:rgba(46,213,115,0.15); color:var(--green); }
-.verdict-sub { font-size:11px; color:var(--text2); margin-bottom:12px; }
+.verdict-sub { font-size:11px; color:var(--text2); margin-bottom:12px; text-align:center; }
 .powered-badge { font-size:10px; color:var(--text2); display:flex; align-items:center; justify-content:center; gap:4px; }
+
+.progress-row { display:flex; justify-content:space-between; font-size:11px; color:var(--text2); margin-bottom:6px; }
+.progress-track { height:6px; background:var(--surface3); border-radius:4px; overflow:hidden; }
+.progress-fill { height:100%; width:0%; background:linear-gradient(90deg, var(--accent), var(--accent2)); border-radius:4px; transition:width 0.3s; }
 
 .risk-stat { display:flex; justify-content:space-between; align-items:center; padding:8px 0; border-bottom:1px solid var(--border); }
 .risk-stat:last-child { border-bottom:none; }
@@ -643,10 +686,15 @@ body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg); co
 .risk-stat-value.bad { color:var(--red); }
 .risk-stat-value.neutral { color:var(--text2); }
 
-/* ── INSIGHTS ── */
+/* ── INSIGHTS / WHY ── */
 .insights-card { background:var(--surface); border:1px solid var(--border); border-radius:16px; padding:16px; margin-top:16px; }
-.insight-item { display:flex; align-items:center; gap:8px; padding:6px 0; font-size:12px; color:var(--text2); }
-.insight-dot { width:6px; height:6px; border-radius:50%; background:var(--accent); flex-shrink:0; }
+.insight-item { display:flex; align-items:flex-start; gap:8px; padding:6px 0; font-size:12px; color:var(--text2); line-height:1.5; }
+.insight-dot { width:6px; height:6px; border-radius:50%; background:var(--accent); flex-shrink:0; margin-top:5px; }
+
+/* ── ABOUT ── */
+.about-card p { font-size:12px; color:var(--text2); line-height:1.7; margin-top:8px; }
+.about-helpline { margin-top:14px; padding:12px; background:var(--surface2); border-radius:10px; font-size:12px; color:var(--text2); display:flex; align-items:center; gap:10px; border:1px solid var(--border); }
+.about-helpline-icon { font-size:18px; flex-shrink:0; }
 
 /* ── RESULT PAGE ── */
 .result-grid { display:grid; grid-template-columns:320px 1fr; gap:20px; }
@@ -732,24 +780,24 @@ body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg); co
     </div>
 
     <div class="nav-section">Main</div>
-    <a class="nav-item active" href="/?lang={{ lang }}">
+    <a class="nav-item {% if not result %}active{% endif %}" href="/?lang={{ lang }}">
         <span class="nav-icon">🏠</span> {{ t.new_check }}
         <span class="nav-badge">AI</span>
     </a>
 
     <div class="nav-section">Tools</div>
-    <a class="nav-item" href="#how-it-works" onclick="scrollTo('how-it-works'); closeSidebar();">
+    <a class="nav-item" href="/?lang={{ lang }}#how-it-works" onclick="return navAnchor(event, 'how-it-works')">
         <span class="nav-icon">❓</span> {{ t.how_it_works }}
     </a>
-    <a class="nav-item" href="#safety-tips" onclick="scrollTo('safety-tips'); closeSidebar();">
+    <a class="nav-item" href="/?lang={{ lang }}#safety-tips" onclick="return navAnchor(event, 'safety-tips')">
         <span class="nav-icon">🛡️</span> {{ t.safety_tips }}
     </a>
-    <a class="nav-item" href="https://cybercrime.gov.in" target="_blank">
+    <a class="nav-item" href="https://cybercrime.gov.in" target="_blank" rel="noopener">
         <span class="nav-icon">🚨</span> Report Scam
     </a>
 
     <div class="nav-section">Info</div>
-    <a class="nav-item" href="#about" onclick="scrollTo('about'); closeSidebar();">
+    <a class="nav-item" href="/?lang={{ lang }}#about" onclick="return navAnchor(event, 'about')">
         <span class="nav-icon">ℹ️</span> {{ t.about }}
     </a>
 
@@ -808,12 +856,12 @@ body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg); co
         <div class="hero-shield">🛡️</div>
     </div>
 
-    <form method="POST" action="/check?lang={{ lang }}" enctype="multipart/form-data">
+    <form method="POST" action="/check?lang={{ lang }}" enctype="multipart/form-data" id="checkForm">
 
     <!-- FORM GRID: Upload + Right panel -->
     <div class="form-grid">
 
-        <!-- LEFT COL: Image Upload -->
+        <!-- LEFT COL: Image Upload + Why It Matters -->
         <div style="display:flex; flex-direction:column; gap:16px;">
             <div class="card">
                 <div class="card-title">🖼️ {{ t.image_title }}</div>
@@ -829,9 +877,18 @@ body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg); co
                     </div>
                 </div>
             </div>
+
+            <div class="card">
+                <div class="card-title">💡 {{ t.why_title }}</div>
+                <div style="margin-top:8px;">
+                    {% for item in t.why_items %}
+                    <div class="insight-item"><div class="insight-dot"></div>{{ item }}</div>
+                    {% endfor %}
+                </div>
+            </div>
         </div>
 
-        <!-- RIGHT COL: How it works + Score preview + Insights -->
+        <!-- RIGHT COL: How it works + Live score preview -->
         <div style="display:flex; flex-direction:column; gap:16px;">
 
             <div class="how-card" id="how-it-works">
@@ -844,12 +901,23 @@ body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg); co
             </div>
 
             <div class="risk-panel">
-                <div class="risk-score-label">📈 {{ t.trust_score }}</div>
-                <div style="text-align:center; padding:16px 0; color:var(--text2); font-size:12px;">
-                    <div style="font-size:48px; font-weight:900; color:var(--border);">--</div>
-                    <div style="font-size:12px; color:var(--text2);">/100</div>
-                    <div style="margin-top:8px; font-size:11px;">Answer the questions below<br>to get your risk score.</div>
+                <div class="risk-score-label">
+                    📈 {{ t.trust_score }}
+                    <span class="live-tag"><span class="live-dot"></span>{{ t.live_badge }}</span>
                 </div>
+                <div class="score-ring-wrap">
+                    <div class="score-ring green" id="liveRing">
+                        <div class="score-num green" id="liveScoreNum">0</div>
+                        <div class="score-denom">/100</div>
+                    </div>
+                    <div class="verdict-pill green" id="liveVerdictPill">🟢 {{ t.low_risk }}</div>
+                    <div class="verdict-sub" id="liveVerdictSub">{{ t.live_hint }}</div>
+                </div>
+                <div class="progress-row">
+                    <span>{{ t.answered_label }}</span>
+                    <span id="answeredCount">0/8</span>
+                </div>
+                <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
             </div>
 
             <div class="insights-card" id="safety-tips">
@@ -898,9 +966,6 @@ body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg); co
     </button>
 
     </form>
-
-    <!-- ABOUT section -->
-    <div id="about"></div>
 
     {% else %}
 
@@ -1014,6 +1079,17 @@ body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg); co
 
     {% endif %}
 
+    <!-- ABOUT (always available, regardless of page) -->
+    <div class="card about-card" id="about" style="margin-top:20px;">
+        <div class="card-title">🛡️ {{ t.about }}</div>
+        <p>{{ t.about_p1 }}</p>
+        <p>{{ t.about_p2 }}</p>
+        <div class="about-helpline">
+            <span class="about-helpline-icon">📞</span>
+            <span>{{ t.about_helpline }}</span>
+        </div>
+    </div>
+
     <div class="disclaimer">{{ t.disclaimer }}</div>
 
     </div>
@@ -1052,10 +1128,82 @@ function closeSidebar() {
     document.getElementById('sidebar').classList.remove('open');
     document.getElementById('sidebarOverlay').classList.remove('open');
 }
-function scrollTo(id) {
+function scrollToId(id) {
     const el = document.getElementById(id);
     if (el) { el.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
 }
+// Sidebar anchor links: smooth-scroll if the section exists on this page,
+// otherwise fall back to a normal navigation to the home page + hash.
+function navAnchor(e, id) {
+    closeSidebar();
+    const el = document.getElementById(id);
+    if (el) {
+        e.preventDefault();
+        scrollToId(id);
+        return false;
+    }
+    return true;
+}
+window.addEventListener('DOMContentLoaded', function () {
+    if (location.hash) {
+        const id = location.hash.substring(1);
+        setTimeout(function () { scrollToId(id); }, 150);
+    }
+});
+
+/* ── LIVE TRUST SCORE PREVIEW ──
+   Mirrors the server-side fallback scoring weights so the user gets an
+   instant, evolving estimate while answering — final score (and the
+   image analysis) is always calculated server-side by the AI model. */
+const QUESTION_POINTS = [25, 20, 15, 15, 10, 10, 20, 25];
+const LIVE_T = {
+    high: {{ t.high_risk | tojson }},
+    highSub: {{ t.high_risk_sub | tojson }},
+    caution: {{ t.caution | tojson }},
+    cautionSub: {{ t.caution_sub | tojson }},
+    low: {{ t.low_risk | tojson }},
+    lowSub: {{ t.low_risk_sub | tojson }},
+    hint: {{ t.live_hint | tojson }}
+};
+
+function updateLiveScore() {
+    const ring = document.getElementById('liveRing');
+    if (!ring) return; // not on the form page
+
+    const radios = document.querySelectorAll('#checkForm input[type=radio]:checked');
+    let score = 0, answered = 0;
+    radios.forEach(function (input) {
+        answered++;
+        if (input.value === 'yes') {
+            const qIndex = parseInt(input.name.replace('q', ''), 10);
+            score += QUESTION_POINTS[qIndex] || 0;
+        }
+    });
+    score = Math.min(score, 100);
+
+    let color, verdictText, verdictSub, emoji;
+    if (score >= 70) { color = 'red'; verdictText = LIVE_T.high; verdictSub = LIVE_T.highSub; emoji = '🔴'; }
+    else if (score >= 35) { color = 'orange'; verdictText = LIVE_T.caution; verdictSub = LIVE_T.cautionSub; emoji = '🟡'; }
+    else { color = 'green'; verdictText = LIVE_T.low; verdictSub = LIVE_T.lowSub; emoji = '🟢'; }
+
+    ['red', 'orange', 'green'].forEach(function (c) {
+        ring.classList.remove(c);
+        document.getElementById('liveScoreNum').classList.remove(c);
+        document.getElementById('liveVerdictPill').classList.remove(c);
+    });
+    ring.classList.add(color);
+    document.getElementById('liveScoreNum').classList.add(color);
+    document.getElementById('liveVerdictPill').classList.add(color);
+
+    document.getElementById('liveScoreNum').textContent = score;
+    document.getElementById('liveVerdictPill').textContent = emoji + ' ' + verdictText;
+    document.getElementById('liveVerdictSub').textContent = answered === 0 ? LIVE_T.hint : verdictSub;
+    document.getElementById('answeredCount').textContent = answered + '/8';
+    document.getElementById('progressFill').style.width = (answered / 8 * 100) + '%';
+}
+document.querySelectorAll('#checkForm input[type=radio]').forEach(function (input) {
+    input.addEventListener('change', updateLiveScore);
+});
 </script>
 </body>
 </html>
