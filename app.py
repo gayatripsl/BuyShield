@@ -34,7 +34,7 @@ TRANSLATIONS = {
         'instant': 'Instant Result',
         'free_forever': '100% Free Forever',
         'no_signup': 'No sign up. No limits.',
-        'made_india': '🇮🇳 Made for India',
+        'made_india': '🛡️ Made for India',
         'new_check': 'New Check',
         'history': 'History',
         'analytics': 'Analytics',
