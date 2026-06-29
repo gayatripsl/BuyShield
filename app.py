@@ -16,6 +16,12 @@ try:
 except Exception as e:
     print(f"⚠️ Model not found: {e}")
 
+LANG_LABELS = {
+    'en': 'English',
+    'te': 'తెలుగు',
+    'hi': 'हिंदी',
+}
+
 TRANSLATIONS = {
     'en': {
         'title': 'BuyShield — AI Scam Protection',
@@ -551,12 +557,34 @@ body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg); co
     padding:4px 10px; border-radius:20px; border:1px solid var(--border);
 }
 .topbar-right { display:flex; align-items:center; gap:8px; }
-.lang-group { display:flex; gap:4px; background:var(--surface2); padding:3px; border-radius:8px; }
-.lang-btn {
-    padding:4px 10px; border-radius:6px; font-size:12px; font-weight:600;
-    text-decoration:none; color:var(--text2); border:none; background:none; cursor:pointer;
+
+/* ── LANGUAGE POPUP ── */
+.lang-dropdown { position:relative; }
+.lang-toggle-btn {
+    display:flex; align-items:center; gap:6px;
+    padding:6px 12px; border-radius:8px; border:1px solid var(--border);
+    background:var(--surface2); color:var(--text); font-size:12px; font-weight:700;
+    cursor:pointer; transition:border-color 0.15s;
 }
-.lang-btn.active { background:var(--accent); color:white; }
+.lang-toggle-btn:hover { border-color:var(--accent); }
+.lang-toggle-icon { font-size:14px; }
+.lang-caret { font-size:9px; color:var(--text2); transition:transform 0.2s; margin-left:2px; }
+.lang-dropdown.open .lang-caret { transform:rotate(180deg); }
+.lang-popup {
+    position:absolute; top:calc(100% + 8px); right:0; left:auto;
+    background:var(--surface); border:1px solid var(--border); border-radius:12px;
+    box-shadow:var(--card-shadow); padding:6px; min-width:160px; z-index:200;
+    display:none; flex-direction:column; gap:2px;
+}
+.lang-dropdown.open .lang-popup { display:flex; }
+.lang-popup-item {
+    display:flex; align-items:center; justify-content:space-between;
+    padding:9px 12px; border-radius:8px; font-size:13px; font-weight:600;
+    text-decoration:none; color:var(--text2); transition:all 0.15s;
+}
+.lang-popup-item:hover { background:var(--surface2); color:var(--text); }
+.lang-popup-item.active { background:rgba(124,92,252,0.15); color:var(--accent); }
+.lang-popup-check { font-size:12px; color:var(--accent); }
 .theme-btn {
     width:32px; height:32px; border-radius:8px; border:1px solid var(--border);
     background:var(--surface2); cursor:pointer; font-size:14px;
@@ -732,9 +760,6 @@ body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg); co
 
 .disclaimer { font-size:11px; color:var(--text2); text-align:center; padding:16px; border-top:1px solid var(--border); line-height:1.6; }
 
-/* ── MOBILE LANG ── */
-.mobile-lang { display:none; }
-
 /* ── HAMBURGER ── */
 .hamburger { display:none; width:36px; height:36px; border-radius:8px; background:var(--surface2); border:1px solid var(--border); cursor:pointer; align-items:center; justify-content:center; font-size:18px; }
 .sidebar-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:99; }
@@ -752,10 +777,6 @@ body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg); co
     .hero { flex-direction:column; text-align:center; }
     .hero-shield { font-size:80px; }
     .hero-text h1 { font-size:28px; }
-    .mobile-lang { display:flex; justify-content:center; gap:8px; padding:10px; background:var(--surface); border-bottom:1px solid var(--border); }
-    .mobile-lang-btn { padding:7px 16px; border-radius:8px; font-size:13px; font-weight:700; text-decoration:none; border:1px solid var(--border); background:var(--surface2); color:var(--text2); }
-    .mobile-lang-btn.active { background:var(--accent); color:white; border-color:var(--accent); }
-    .topbar .lang-group { display:none; }
 }
 @media (max-width: 480px) {
     .questions-grid { grid-template-columns:repeat(2,1fr); }
@@ -818,20 +839,26 @@ body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg); co
             <span class="made-badge">{{ t.made_india }}</span>
         </div>
         <div class="topbar-right">
-            <div class="lang-group">
-                <a href="/?lang=en" class="lang-btn {% if lang == 'en' %}active{% endif %}">EN</a>
-                <a href="/?lang=te" class="lang-btn {% if lang == 'te' %}active{% endif %}">తెలుగు</a>
-                <a href="/?lang=hi" class="lang-btn {% if lang == 'hi' %}active{% endif %}">हिंदी</a>
+            <div class="lang-dropdown" id="langDropdown">
+                <button class="lang-toggle-btn" onclick="toggleLangMenu(event)" type="button">
+                    <span class="lang-toggle-icon">🌐</span>
+                    <span>{{ lang_label }}</span>
+                    <span class="lang-caret">▾</span>
+                </button>
+                <div class="lang-popup" id="langPopup">
+                    <a href="/?lang=en" class="lang-popup-item {% if lang == 'en' %}active{% endif %}">
+                        English {% if lang == 'en' %}<span class="lang-popup-check">✓</span>{% endif %}
+                    </a>
+                    <a href="/?lang=te" class="lang-popup-item {% if lang == 'te' %}active{% endif %}">
+                        తెలుగు {% if lang == 'te' %}<span class="lang-popup-check">✓</span>{% endif %}
+                    </a>
+                    <a href="/?lang=hi" class="lang-popup-item {% if lang == 'hi' %}active{% endif %}">
+                        हिंदी {% if lang == 'hi' %}<span class="lang-popup-check">✓</span>{% endif %}
+                    </a>
+                </div>
             </div>
             <button class="theme-btn" onclick="toggleTheme()" id="themeBtn">🌙</button>
         </div>
-    </div>
-
-    <!-- MOBILE LANG BAR -->
-    <div class="mobile-lang">
-        <a href="/?lang=en" class="mobile-lang-btn {% if lang == 'en' %}active{% endif %}">English</a>
-        <a href="/?lang=te" class="mobile-lang-btn {% if lang == 'te' %}active{% endif %}">తెలుగు</a>
-        <a href="/?lang=hi" class="mobile-lang-btn {% if lang == 'hi' %}active{% endif %}">हिंदी</a>
     </div>
 
     <div class="content">
@@ -1128,6 +1155,23 @@ function closeSidebar() {
     document.getElementById('sidebar').classList.remove('open');
     document.getElementById('sidebarOverlay').classList.remove('open');
 }
+
+/* ── LANGUAGE POPUP ── */
+function toggleLangMenu(e) {
+    e.stopPropagation();
+    document.getElementById('langDropdown').classList.toggle('open');
+}
+document.addEventListener('click', function (e) {
+    const dd = document.getElementById('langDropdown');
+    if (dd && !dd.contains(e.target)) dd.classList.remove('open');
+});
+document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') {
+        const dd = document.getElementById('langDropdown');
+        if (dd) dd.classList.remove('open');
+    }
+});
+
 function scrollToId(id) {
     const el = document.getElementById(id);
     if (el) { el.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
@@ -1215,7 +1259,7 @@ def home():
     if lang not in TRANSLATIONS:
         lang = 'en'
     t = TRANSLATIONS[lang]
-    return render_template_string(HTML, result=False, t=t, lang=lang)
+    return render_template_string(HTML, result=False, t=t, lang=lang, lang_label=LANG_LABELS[lang])
 
 @app.route("/check", methods=["POST"])
 def check():
@@ -1253,7 +1297,7 @@ def check():
         verdict=verdict, verdict_sub=verdict_sub,
         color=color, guidance=guidance,
         image_findings=image_findings,
-        t=t, lang=lang
+        t=t, lang=lang, lang_label=LANG_LABELS[lang]
     )
 
 if __name__ == "__main__":
