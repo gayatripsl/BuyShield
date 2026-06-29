@@ -36,11 +36,11 @@ TRANSLATIONS = {
         'safety_tips': 'Safety Tips',
         'about': 'About Us',
         'image_title': 'Upload Product Image (Optional)',
-        'image_desc': 'Upload a product photo. We\'ll analyze it for red flags.',
+        'image_desc': "Upload a product photo the seller sent you. We'll analyse it for red flags.",
         'image_label': 'Drag & drop or click to upload',
         'image_hint': 'JPG, PNG, WEBP — Max 5MB',
         'questions_title': 'Answer 8 Simple Questions',
-        'questions_sub': 'Help our AI understand the seller\'s behaviour',
+        'questions_sub': "Help our AI understand the seller's behaviour",
         'analyze_btn': 'Analyze Seller',
         'analyze_sub': 'AI will check and give risk score in seconds',
         'trust_score': 'Trust Score',
@@ -73,23 +73,23 @@ TRANSLATIONS = {
         'questions': [
             'Did the seller REFUSE a video call showing the product?',
             'Did they demand FULL PAYMENT before showing the actual product?',
-            'Did they REFUSE to photograph the product with today\'s date?',
+            "Did they REFUSE to photograph the product with today's date on paper?",
             'Did they use urgency like "today only offer" or "last piece left"?',
             'Is their Instagram page LESS THAN 1 MONTH old?',
-            'Do they have VERY FEW followers or low engagement?',
-            'Did they ask you to pay outside safe payment methods?',
-            'Did something about the deal feel SUSPICIOUS?',
+            'Are their prices UNREALISTICALLY CHEAP compared to market?',
+            'Did they BLOCK YOU or go silent after payment?',
+            'After payment, did they ask for EXTRA MONEY like shipping fee?',
         ],
-        'q_icons': ['🎥', '💳', '📸', '⚡', '📅', '👥', '💸', '⚠️'],
+        'q_icons': ['🎥', '💳', '📸', '⚡', '📅', '💰', '🚫', '💸'],
         'flags': [
             'Seller refused video call — genuine sellers always agree to show product live',
-            'Demanded payment WITHOUT showing product first — a primary scam mechanism',
+            'Demanded payment WITHOUT showing product first — primary scam mechanism',
             'Refused date proof photo — suggests product does not exist',
             'Used urgency tactics — designed to stop you from thinking carefully',
             'Page less than 1 month old — scammers need to act fast and disappear',
-            'Very few followers or low engagement — suspicious for a seller page',
-            'Asked to pay outside safe methods — major red flag',
-            'Deal felt suspicious — trust your instincts',
+            'Prices unrealistically low — scammers use low prices as bait',
+            'Blocked after payment — confirmed scam behaviour',
+            'Asked for extra charges after payment — this is Advance Fee Fraud',
         ],
         'guidance_high': [
             'Do NOT send any more money',
@@ -101,7 +101,7 @@ TRANSLATIONS = {
         ],
         'guidance_medium': [
             'Ask seller for a video call showing product RIGHT NOW',
-            'Ask seller to photograph product with TODAY\'S DATE on paper',
+            "Ask seller to photograph product with TODAY'S DATE on paper",
             'Do NOT pay full amount before seeing product',
             'Search seller phone number on Truecaller',
             'Save all chat screenshots before paying',
@@ -119,7 +119,7 @@ TRANSLATIONS = {
             'suspicious_ratio': 'Image dimensions look unusual — may be a screenshot of another listing',
         },
         'img_safe': 'Image appears to be an original photo — no suspicious patterns detected',
-        'img_note': 'Scam images which are copied only edit the color or blur the product can be often used to lure victims.',
+        'img_note': 'Note: Image analysis is one signal only. Ask the seller to show the product on a live video call to be certain.',
     },
     'te': {
         'title': 'BuyShield — AI స్కామ్ రక్షణ',
@@ -176,24 +176,24 @@ TRANSLATIONS = {
         'low_risk_sub': 'జాగ్రత్తగా ముందుకు వెళ్ళండి',
         'questions': [
             'విక్రేత వీడియో కాల్‌ను తిరస్కరించారా?',
-            'ఉత్పత్తి చూపించే ముందే పూర్తి చెల్లింపు అడిగారా?',
-            'నేటి తేదీతో ఫోటో తీయడానికి నిరాకరించారా?',
+            'ఉత్పత్తి చూపించే ముందే పూర్తి చెల్లింపు డిమాండ్ చేశారా?',
+            'నేటి తేదీ కాగితంతో ఫోటో తీయడానికి నిరాకరించారా?',
             '"ఈరోజు మాత్రమే" వంటి అత్యవసరత చూపించారా?',
             'వారి Instagram పేజీ 1 నెల కంటే తక్కువ పాతదా?',
-            'చాలా తక్కువ ఫాలోయర్లు లేదా తక్కువ నిశ్చితార్థం ఉందా?',
-            'సురక్షిత చెల్లింపు పద్ధతులకు వెలుపల చెల్లించమని అడిగారా?',
-            'డీల్ గురించి అనుమానాస్పదంగా అనిపించిందా?',
+            'ధరలు అసాధారణంగా తక్కువగా ఉన్నాయా?',
+            'చెల్లింపు తర్వాత బ్లాక్ చేశారా?',
+            'చెల్లింపు తర్వాత అదనపు డబ్బు అడిగారా?',
         ],
-        'q_icons': ['🎥', '💳', '📸', '⚡', '📅', '👥', '💸', '⚠️'],
+        'q_icons': ['🎥', '💳', '📸', '⚡', '📅', '💰', '🚫', '💸'],
         'flags': [
             'వీడియో కాల్ తిరస్కరించారు — నిజమైన విక్రేతలు ఎప్పుడూ అంగీకరిస్తారు',
             'ఉత్పత్తి చూపించే ముందే చెల్లింపు అడిగారు — ప్రధాన మోసం పద్ధతి',
             'నేటి తేదీతో ఫోటో తీయడానికి నిరాకరించారు',
             'అత్యవసరత వ్యూహాలు ఉపయోగించారు',
             'పేజీ 1 నెల కంటే తక్కువ పాతది',
-            'చాలా తక్కువ ఫాలోయర్లు లేదా నిశ్చితార్థం',
-            'సురక్షిత చెల్లింపుకు వెలుపల అడిగారు',
-            'డీల్ అనుమానాస్పదంగా అనిపించింది',
+            'ధరలు అసాధారణంగా తక్కువ — స్కామర్లు ఆకర్షించడానికి',
+            'చెల్లింపు తర్వాత బ్లాక్ చేశారు — నిర్ధారిత మోసం',
+            'చెల్లింపు తర్వాత అదనపు చార్జీలు అడిగారు — అడ్వాన్స్ ఫీ మోసం',
         ],
         'guidance_high': [
             'ఇంకా డబ్బు పంపకండి',
@@ -223,7 +223,7 @@ TRANSLATIONS = {
             'suspicious_ratio': 'చిత్రం కొలతలు అనుమానాస్పదంగా ఉన్నాయి',
         },
         'img_safe': 'చిత్రం అసలైనదిగా కనిపిస్తోంది',
-        'img_note': 'కాపీ చేసిన స్కామ్ చిత్రాలు తరచుగా రంగు మాత్రమే మారుస్తాయి.',
+        'img_note': 'గమనిక: నిర్ధారణకు వీడియో కాల్ అడగండి.',
     },
     'hi': {
         'title': 'BuyShield — AI स्कैम सुरक्षा',
@@ -244,7 +244,7 @@ TRANSLATIONS = {
         'safety_tips': 'सुरक्षा टिप्स',
         'about': 'हमारे बारे में',
         'image_title': 'उत्पाद छवि अपलोड करें (वैकल्पिक)',
-        'image_desc': 'उत्पाद फोटो अपलोड करें। हम इसका विश्लेषण करेंगे।',
+        'image_desc': 'विक्रेता द्वारा भेजी गई उत्पाद फोटो अपलोड करें।',
         'image_label': 'ड्रैग & ड्रॉप या क्लिक करें',
         'image_hint': 'JPG, PNG, WEBP — अधिकतम 5MB',
         'questions_title': '8 सरल प्रश्नों का उत्तर दें',
@@ -284,20 +284,20 @@ TRANSLATIONS = {
             'क्या उन्होंने आज की तारीख वाली फोटो लेने से मना किया?',
             'क्या उन्होंने "आज का ऑफर" जैसी जल्दबाजी दिखाई?',
             'क्या उनका Instagram पेज 1 महीने से कम पुराना है?',
-            'क्या बहुत कम फॉलोअर्स या कम एंगेजमेंट है?',
-            'क्या उन्होंने सुरक्षित भुगतान के बाहर पैसे मांगे?',
-            'क्या डील के बारे में कुछ संदिग्ध लगा?',
+            'क्या उनकी कीमतें असामान्य रूप से कम हैं?',
+            'क्या भुगतान के बाद उन्होंने ब्लॉक किया?',
+            'क्या भुगतान के बाद अतिरिक्त पैसे मांगे?',
         ],
-        'q_icons': ['🎥', '💳', '📸', '⚡', '📅', '👥', '💸', '⚠️'],
+        'q_icons': ['🎥', '💳', '📸', '⚡', '📅', '💰', '🚫', '💸'],
         'flags': [
             'वीडियो कॉल से मना किया — असली विक्रेता हमेशा तैयार रहते हैं',
             'उत्पाद दिखाए बिना भुगतान मांगा — मुख्य धोखाधड़ी तरीका',
             'आज की तारीख वाली फोटो से मना किया',
             'जल्दबाजी की रणनीति इस्तेमाल की',
             'पेज 1 महीने से कम पुराना',
-            'बहुत कम फॉलोअर्स या एंगेजमेंट',
-            'सुरक्षित भुगतान के बाहर पैसे मांगे',
-            'डील संदिग्ध लगी',
+            'कीमतें असामान्य रूप से कम — धोखेबाज सस्ती कीमत से फंसाते हैं',
+            'भुगतान के बाद ब्लॉक किया — पुष्टि हुई धोखाधड़ी',
+            'भुगतान के बाद अतिरिक्त शुल्क मांगा — एडवांस फी धोखाधड़ी',
         ],
         'guidance_high': [
             'अब और पैसे न भेजें',
@@ -310,9 +310,9 @@ TRANSLATIONS = {
         'guidance_medium': [
             'वीडियो कॉल मांगें',
             'आज की तारीख वाली फोटो मांगें',
-            'पूरा भुगतान न करें',
+            'उत्पाद देखे बिना पूरा भुगतान न करें',
             'Truecaller पर नंबर खोजें',
-            'चैट स्क्रीनशॉट सेव करें',
+            'सभी चैट स्क्रीनशॉट सेव करें',
         ],
         'guidance_low': [
             'सावधानी से आगे बढ़ें',
@@ -327,7 +327,7 @@ TRANSLATIONS = {
             'suspicious_ratio': 'छवि का आकार संदिग्ध है',
         },
         'img_safe': 'छवि मूल प्रतीत होती है',
-        'img_note': 'कॉपी की गई स्कैम छवियां अक्सर केवल रंग बदलती हैं।',
+        'img_note': 'नोट: पुष्टि के लिए वीडियो कॉल मांगें।',
     }
 }
 
@@ -369,8 +369,8 @@ def calculate_risk_score(answers):
     flag_indices = []
     checks = [
         'refused_video_call', 'payment_before_product', 'refused_date_photo',
-        'urgency_tactics', 'page_very_new', 'low_engagement',
-        'unsafe_payment', 'felt_suspicious',
+        'urgency_tactics', 'page_very_new', 'unrealistic_price',
+        'blocked_after_payment', 'extra_charges_after_payment',
     ]
     for i, key in enumerate(checks):
         if answers.get(key):
@@ -383,15 +383,15 @@ def calculate_risk_score(answers):
                 'refused_date_photo': int(answers.get('refused_date_photo', False)),
                 'urgency_tactics': int(answers.get('urgency_tactics', False)),
                 'page_very_new': int(answers.get('page_very_new', False)),
-                'unrealistic_price': int(answers.get('low_engagement', False)),
-                'blocked_after_payment': int(answers.get('unsafe_payment', False)),
-                'extra_charges_after_payment': int(answers.get('felt_suspicious', False)),
+                'unrealistic_price': int(answers.get('unrealistic_price', False)),
+                'blocked_after_payment': int(answers.get('blocked_after_payment', False)),
+                'extra_charges_after_payment': int(answers.get('extra_charges_after_payment', False)),
             }])
             prob = model.predict_proba(input_data)[0][1]
             return int(prob * 100), flag_indices
         except Exception as e:
             print(f"Model error: {e}")
-    points = [25, 20, 15, 15, 10, 5, 15, 10]
+    points = [25, 20, 15, 15, 10, 10, 20, 25]
     score = sum(points[i] for i in flag_indices)
     return min(score, 100), flag_indices
 
@@ -403,13 +403,18 @@ def get_verdict(score, t):
     else:
         return t['low_risk'], t['low_risk_sub'], 'green'
 
-def get_guidance(score, t):
+def get_guidance(score, answers, t):
     if score >= 70:
-        return t['guidance_high']
+        guidance = list(t['guidance_high'])
+        if answers.get('extra_charges_after_payment') and len(guidance) > 1:
+            # Already included stop paying extra charges at index 1
+            pass
+        return guidance
     elif score >= 35:
         return t['guidance_medium']
     else:
         return t['guidance_low']
+
 
 HTML = """
 <!DOCTYPE html>
@@ -428,7 +433,7 @@ HTML = """
     --border: #2a2a50;
     --text: #ffffff;
     --text2: #9090b8;
-    --text3: #5050808;
+    --text3: #606090;
     --accent: #7c5cfc;
     --accent2: #9b7cff;
     --red: #ff4757;
@@ -445,7 +450,7 @@ HTML = """
     --surface3: #ebebff;
     --border: #e0e0f0;
     --text: #1a1a35;
-    --text2: #5050808;
+    --text2: #505080;
     --text3: #9090b8;
     --accent: #7c5cfc;
     --accent2: #6040e0;
@@ -476,6 +481,8 @@ body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg); co
 .sidebar-logo-text span { color:var(--accent); }
 .sidebar-sub { font-size:10px; color:var(--text2); margin-top:1px; }
 
+.nav-section { font-size:10px; font-weight:700; color:var(--text3); text-transform:uppercase; letter-spacing:1.2px; padding:0 12px; margin:16px 0 6px; }
+
 .nav-item {
     display:flex; align-items:center; gap:10px; padding:10px 12px;
     border-radius:10px; color:var(--text2); font-size:13px; font-weight:500;
@@ -486,6 +493,7 @@ body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg); co
 .nav-item.active { background:linear-gradient(135deg, rgba(124,92,252,0.2), rgba(124,92,252,0.1)); color:var(--accent); font-weight:600; }
 .nav-item.active .nav-icon { color:var(--accent); }
 .nav-icon { font-size:16px; width:20px; text-align:center; }
+.nav-badge { margin-left:auto; font-size:10px; background:var(--accent); color:white; padding:2px 7px; border-radius:20px; }
 
 .sidebar-footer { margin-top:auto; padding:16px 12px; background:linear-gradient(135deg, rgba(124,92,252,0.15), rgba(124,92,252,0.05)); border-radius:12px; border:1px solid rgba(124,92,252,0.2); }
 .sidebar-footer p { font-size:13px; font-weight:700; color:var(--text); margin-bottom:4px; }
@@ -679,9 +687,16 @@ body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg); co
 /* ── MOBILE LANG ── */
 .mobile-lang { display:none; }
 
+/* ── HAMBURGER ── */
+.hamburger { display:none; width:36px; height:36px; border-radius:8px; background:var(--surface2); border:1px solid var(--border); cursor:pointer; align-items:center; justify-content:center; font-size:18px; }
+.sidebar-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:99; }
+
 /* ── RESPONSIVE ── */
 @media (max-width: 900px) {
     .sidebar { transform:translateX(-220px); }
+    .sidebar.open { transform:translateX(0); }
+    .sidebar-overlay.open { display:block; }
+    .hamburger { display:flex; }
     .main { margin-left:0; }
     .questions-grid { grid-template-columns:repeat(2,1fr); }
     .form-grid { grid-template-columns:1fr; }
@@ -703,8 +718,11 @@ body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg); co
 </head>
 <body>
 
+<!-- SIDEBAR OVERLAY (mobile) -->
+<div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
+
 <!-- SIDEBAR -->
-<nav class="sidebar">
+<nav class="sidebar" id="sidebar">
     <div class="sidebar-logo">
         <div class="sidebar-logo-icon">🛡️</div>
         <div>
@@ -713,22 +731,25 @@ body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg); co
         </div>
     </div>
 
+    <div class="nav-section">Main</div>
     <a class="nav-item active" href="/?lang={{ lang }}">
         <span class="nav-icon">🏠</span> {{ t.new_check }}
+        <span class="nav-badge">AI</span>
     </a>
-    <a class="nav-item" href="#">
-        <span class="nav-icon">🕐</span> {{ t.history }}
-    </a>
-    <a class="nav-item" href="#">
-        <span class="nav-icon">📊</span> {{ t.analytics }}
-    </a>
-    <a class="nav-item" href="#">
+
+    <div class="nav-section">Tools</div>
+    <a class="nav-item" href="#how-it-works" onclick="scrollTo('how-it-works'); closeSidebar();">
         <span class="nav-icon">❓</span> {{ t.how_it_works }}
     </a>
-    <a class="nav-item" href="#">
+    <a class="nav-item" href="#safety-tips" onclick="scrollTo('safety-tips'); closeSidebar();">
         <span class="nav-icon">🛡️</span> {{ t.safety_tips }}
     </a>
-    <a class="nav-item" href="#">
+    <a class="nav-item" href="https://cybercrime.gov.in" target="_blank">
+        <span class="nav-icon">🚨</span> Report Scam
+    </a>
+
+    <div class="nav-section">Info</div>
+    <a class="nav-item" href="#about" onclick="scrollTo('about'); closeSidebar();">
         <span class="nav-icon">ℹ️</span> {{ t.about }}
     </a>
 
@@ -745,6 +766,7 @@ body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg); co
     <!-- TOPBAR -->
     <div class="topbar">
         <div class="topbar-left">
+            <button class="hamburger" onclick="toggleSidebar()">☰</button>
             <span class="made-badge">{{ t.made_india }}</span>
         </div>
         <div class="topbar-right">
@@ -788,13 +810,11 @@ body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg); co
 
     <form method="POST" action="/check?lang={{ lang }}" enctype="multipart/form-data">
 
-    <!-- FORM GRID -->
+    <!-- FORM GRID: Upload + Right panel -->
     <div class="form-grid">
 
-        <!-- LEFT COL -->
+        <!-- LEFT COL: Image Upload -->
         <div style="display:flex; flex-direction:column; gap:16px;">
-
-            <!-- Image Upload -->
             <div class="card">
                 <div class="card-title">🖼️ {{ t.image_title }}</div>
                 <div class="card-sub">{{ t.image_desc }}</div>
@@ -809,23 +829,12 @@ body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg); co
                     </div>
                 </div>
             </div>
-
-            <!-- Analyze Button -->
-            <button type="submit" class="analyze-card">
-                <div class="analyze-card-text">
-                    <h3>{{ t.analyze_btn }}</h3>
-                    <p>{{ t.analyze_sub }}</p>
-                </div>
-                <div class="analyze-arrow">→</div>
-            </button>
-
         </div>
 
-        <!-- RIGHT COL -->
+        <!-- RIGHT COL: How it works + Score preview + Insights -->
         <div style="display:flex; flex-direction:column; gap:16px;">
 
-            <!-- How it works -->
-            <div class="how-card">
+            <div class="how-card" id="how-it-works">
                 <div class="card-title">{{ t.how_works_title }}</div>
                 <div style="margin-top:12px;">
                     <div class="step"><div class="step-num">1</div><div class="step-text">{{ t.step1 }}</div></div>
@@ -834,18 +843,16 @@ body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg); co
                 </div>
             </div>
 
-            <!-- Risk Panel Preview -->
             <div class="risk-panel">
                 <div class="risk-score-label">📈 {{ t.trust_score }}</div>
                 <div style="text-align:center; padding:16px 0; color:var(--text2); font-size:12px;">
                     <div style="font-size:48px; font-weight:900; color:var(--border);">--</div>
                     <div style="font-size:12px; color:var(--text2);">/100</div>
-                    <div style="margin-top:8px; font-size:11px;">This is an example score.<br>Your result may vary.</div>
+                    <div style="margin-top:8px; font-size:11px;">Answer the questions below<br>to get your risk score.</div>
                 </div>
             </div>
 
-            <!-- Key Insights -->
-            <div class="insights-card">
+            <div class="insights-card" id="safety-tips">
                 <div class="card-title" style="margin-bottom:10px;">💡 {{ t.key_insights }}</div>
                 <div class="insight-item"><div class="insight-dot"></div>{{ t.insight1 }}</div>
                 <div class="insight-item"><div class="insight-dot"></div>{{ t.insight2 }}</div>
@@ -856,7 +863,7 @@ body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg); co
         </div>
     </div>
 
-    <!-- QUESTIONS -->
+    <!-- QUESTIONS (full width, after the grid) -->
     <div class="card" style="margin-bottom:20px;">
         <div class="card-title">🤖 {{ t.questions_title }}</div>
         <div class="card-sub">{{ t.questions_sub }}</div>
@@ -881,7 +888,19 @@ body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg); co
         </div>
     </div>
 
+    <!-- ANALYZE BUTTON (after questions) -->
+    <button type="submit" class="analyze-card" style="margin-bottom:24px;">
+        <div class="analyze-card-text">
+            <h3>{{ t.analyze_btn }}</h3>
+            <p>{{ t.analyze_sub }}</p>
+        </div>
+        <div class="analyze-arrow">→</div>
+    </button>
+
     </form>
+
+    <!-- ABOUT section -->
+    <div id="about"></div>
 
     {% else %}
 
@@ -903,7 +922,6 @@ body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg); co
         <!-- LEFT — Score + Guidance -->
         <div class="result-left">
 
-            <!-- Score Card -->
             <div class="risk-panel">
                 <div class="risk-score-label">📈 {{ t.trust_score }}</div>
                 <div class="score-ring-wrap">
@@ -920,7 +938,6 @@ body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg); co
                 </div>
             </div>
 
-            <!-- Guidance -->
             <div class="card">
                 <div class="card-title">🛡️ {{ t.what_to_do }}</div>
                 <div style="margin-top:12px;">
@@ -933,7 +950,6 @@ body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg); co
                 </div>
             </div>
 
-            <!-- Buttons -->
             {% if score >= 70 %}
             <a href="https://cybercrime.gov.in" target="_blank" class="btn-report">{{ t.report_btn }}</a>
             {% endif %}
@@ -944,7 +960,6 @@ body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg); co
         <!-- RIGHT — Analysis -->
         <div class="result-right">
 
-            <!-- Image Analysis -->
             {% if image_findings is not none %}
             <div class="card">
                 <div class="card-title">🖼️ {{ t.image_analysis }}</div>
@@ -964,7 +979,6 @@ body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg); co
             </div>
             {% endif %}
 
-            <!-- Red Flags -->
             <div class="card">
                 <div class="card-title">
                     {% if flags %}⚠️ {{ t.red_flags }} ({{ flags|length }})
@@ -987,7 +1001,6 @@ body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg); co
                 </div>
             </div>
 
-            <!-- Key Insights -->
             <div class="insights-card">
                 <div class="card-title" style="margin-bottom:10px;">💡 {{ t.key_insights }}</div>
                 <div class="insight-item"><div class="insight-dot"></div>{{ t.insight1 }}</div>
@@ -1030,6 +1043,19 @@ function previewImg(input) {
         reader.readAsDataURL(input.files[0]);
     }
 }
+
+function toggleSidebar() {
+    document.getElementById('sidebar').classList.toggle('open');
+    document.getElementById('sidebarOverlay').classList.toggle('open');
+}
+function closeSidebar() {
+    document.getElementById('sidebar').classList.remove('open');
+    document.getElementById('sidebarOverlay').classList.remove('open');
+}
+function scrollTo(id) {
+    const el = document.getElementById(id);
+    if (el) { el.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+}
 </script>
 </body>
 </html>
@@ -1056,9 +1082,9 @@ def check():
         'refused_date_photo': request.form.get('q2') == 'yes',
         'urgency_tactics': request.form.get('q3') == 'yes',
         'page_very_new': request.form.get('q4') == 'yes',
-        'low_engagement': request.form.get('q5') == 'yes',
-        'unsafe_payment': request.form.get('q6') == 'yes',
-        'felt_suspicious': request.form.get('q7') == 'yes',
+        'unrealistic_price': request.form.get('q5') == 'yes',
+        'blocked_after_payment': request.form.get('q6') == 'yes',
+        'extra_charges_after_payment': request.form.get('q7') == 'yes',
     }
 
     score, flag_indices = calculate_risk_score(answers)
@@ -1072,7 +1098,7 @@ def check():
 
     verdict, verdict_sub, color = get_verdict(score, t)
     flags = [t['flags'][i] for i in flag_indices]
-    guidance = get_guidance(score, t)
+    guidance = get_guidance(score, answers, t)
 
     return render_template_string(HTML,
         result=True, score=score, flags=flags,
